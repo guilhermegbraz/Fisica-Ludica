@@ -1,0 +1,16 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        mavenLocal()
+        google()
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+rootProject.name = "Fisica Ludica"
+include ':app'
