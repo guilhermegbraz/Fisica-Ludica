@@ -2,4 +2,6 @@
     <string name="app_name">Fisica Ludica</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_image_view_logo_description">app logo in the home fragment</string>
+    <string name="home_fragment_image_button_start_description">image button for start to play</string>
 </resources>
