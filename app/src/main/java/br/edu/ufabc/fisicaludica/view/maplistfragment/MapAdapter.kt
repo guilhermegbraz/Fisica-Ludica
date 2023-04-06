@@ -1,8 +1,9 @@
 package br.edu.ufabc.fisicaludica.view.maplistfragment
-
+/*
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 import br.edu.ufabc.fisicaludica.domain.Map
@@ -21,5 +22,13 @@ class MapAdapter(private val maps:List<Map>, val viewModel: MainViewModel): Recy
         val map = maps[position]
         holder.title.text = map.title
         holder.imageView.setImageDrawable(Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroud))
+        holder.card.setOnClickListener{
+            viewModel.clickedMapId.value = map.id
+        }
     }
+
+
 }
+
+
+ */

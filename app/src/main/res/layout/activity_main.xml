@@ -9,7 +9,8 @@
         tools:context=".view.MainActivity"
         android:background="@drawable/background_green_yard_with_mountains"
         android:screenOrientation="landscape"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+        >
 
     <!--    NavHost -->
     <androidx.fragment.app.FragmentContainerView

@@ -4,7 +4,7 @@ import br.edu.ufabc.fisicaludica.domain.Map
 
 class MapDtoToMap {
 
-    fun execute(mapDto: MapDto): br.edu.ufabc.fisicaludica.domain.Map {
+    fun execute(mapDto: MapDto): Map {
         return Map(mapDto.id, mapDto.background, mapDto.title)
     }
 

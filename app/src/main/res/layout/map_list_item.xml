@@ -28,7 +28,7 @@
                     android:src="@drawable/background_green_yard_with_mountains"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent" android:contentDescription="@string/map_list_item_preview_card_image_of_the_map"/>
             <TextView
                     android:id="@+id/map_list_item_card_title"
                     android:layout_width="wrap_content"
