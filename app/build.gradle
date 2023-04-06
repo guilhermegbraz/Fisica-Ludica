@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -45,6 +46,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation "androidx.fragment:fragment-ktx:1.5.6"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'com.beust:klaxon:5.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     //implementation (name:'KorgeMPExample-debug', ext:'aar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
@@ -56,6 +61,7 @@ dependencies {
     api "com.soywiz.korlibs.korau:korau-android:$korge_version"
     api "com.soywiz.korlibs.kds:kds-android:$korge_version"
     api "com.soywiz.korlibs.korma:korma-android:$korge_version"
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
