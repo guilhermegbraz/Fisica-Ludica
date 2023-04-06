@@ -1,0 +1,42 @@
+[
+	{
+		"id": 1,
+		"background": "background_green_yard_with_mountains.png",
+		"title": "Fase 1"
+	},
+	{
+		"id": 2,
+		"background": "background_green_yard_with_mountains2.png",
+		"title": "Fase 2"
+	},
+	{
+		"id": 3,
+		"background": "background_green_yard_with_mountains3.png",
+		"title": "Fase 3"
+	},
+	{
+		"id": 4,
+		"background": "moon_surfice1.png",
+		"title": "Fase 4"
+	},
+	{
+		"id": 5,
+		"background": "moon_surfice2.png",
+		"title": "Fase 5"
+	},
+	{
+		"id": 6,
+		"background": "urban_city2.png",
+		"title": "Fase 6: cidade"
+	},
+	{
+		"id": 7,
+		"background": "urban_city3.png",
+		"title": "Fase 7"
+	},
+	{
+		"id": 8,
+		"background": "urbancity.png",
+		"title": "Fase final"
+	}
+]
