@@ -19,6 +19,7 @@ class MapAdapter(private val maps:List<Map>, val viewModel: MainViewModel): Recy
 
     override fun onBindViewHolder(holder: MapHolder, position: Int) {
         val map = maps[position]
+        holder.title.text = map.title
         holder.imageView.setImageDrawable(Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroud))
     }
 }

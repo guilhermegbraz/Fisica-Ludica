@@ -4,7 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              xmlns:app="http://schemas.android.com/apk/res-auto"
-             tools:context=".view.MapListFragment">
+             tools:context=".view.maplistfragment.MapListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_map_list"
