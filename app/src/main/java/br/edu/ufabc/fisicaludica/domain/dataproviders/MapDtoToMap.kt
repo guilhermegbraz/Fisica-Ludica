@@ -5,7 +5,7 @@ import br.edu.ufabc.fisicaludica.domain.Map
 class MapDtoToMap {
 
     fun execute(mapDto: MapDto): br.edu.ufabc.fisicaludica.domain.Map {
-        return Map(mapDto.id, mapDto.background)
+        return Map(mapDto.id, mapDto.background, mapDto.title)
     }
 
     fun execute(mapDtos: List<MapDto>): List<Map> {
