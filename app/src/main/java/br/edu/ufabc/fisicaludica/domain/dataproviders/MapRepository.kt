@@ -20,4 +20,11 @@ class MapRepository (private val mapDtoToMapParser: MapDtoToMap){
         )
         throw Exception("Didn't found any Notes")
     }
+
+    fun getMapById(id: Long): Map {
+        return maps.find { it.id == id }
+            ?: throw IllegalArgumentException("Didn't found the map you're looking for").also {
+                Log.d("error", "Didn't found map with id = $id")
+            }
+    }
 }

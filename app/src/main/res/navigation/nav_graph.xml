@@ -15,8 +15,23 @@
     </fragment>
 
     <fragment
-            android:id="@+id/destination_map_list"
-              android:name="br.edu.ufabc.fisicaludica.view.maplistfragment.MapListFragment"
-              android:label="fragment_map_list"
-              tools:layout="@layout/fragment_map_list"/>
+        android:id="@+id/destination_map_list"
+        android:name="br.edu.ufabc.fisicaludica.view.maplistfragment.MapListFragment"
+        android:label="fragment_map_list"
+        tools:layout="@layout/fragment_map_list">
+        <action
+            android:id="@+id/goToGameFragment"
+            app:destination="@id/mapGameFragment"
+        />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapGameFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.MapGameFragment"
+        android:label="fragment_map_game"
+        tools:layout="@layout/fragment_map_game">
+
+        <action android:id="@+id/backToMapList"
+                app:destination="@id/destination_map_list"/>
+    </fragment>
 </navigation>
