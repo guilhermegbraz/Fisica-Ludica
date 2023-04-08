@@ -20,9 +20,22 @@ class DialogPause(): DialogFragment() {
         val dialog = AlertDialog.Builder(context)
             .setView(binding.root)
             .create()
-
         dialog.window?.setGravity(Gravity.CENTER)
-
+        bindEvents()
         return dialog
+    }
+
+    fun bindEvents() {
+        binding.dialogHintPauseExitButton.setOnClickListener {
+            dialog?.dismiss()
+        }
+        binding.dialogHintPauseNextHint.setOnClickListener {
+            val anterior = binding.dialogHintPauseTextviewHint.text.toString()
+
+            binding.dialogHintPauseTextviewHint.text = "$anterior NEXT HINT"
+        }
+        binding.dialogHintPausePreviusHint.setOnClickListener {
+            binding.dialogHintPauseTextviewHint.text = "Dica anterior"
+        }
     }
 }
