@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.view.maplistfragment
+package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -44,7 +44,7 @@ class MapListFragment : Fragment() {
 
             holder.card.setOnClickListener{
                 viewModel.clickedMapId.value = map.id
-                MapListFragmentDirections.goToGameFragment().let {action ->
+                MapListFragmentDirections.goToGameFragment().let { action ->
                     findNavController().navigate(action)
                 }
             }

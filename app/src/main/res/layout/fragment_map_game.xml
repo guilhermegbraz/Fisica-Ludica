@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/fragment_game_map_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_game_map_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MapGameFragment"
+    tools:context=".view.fragments.MapGameFragment"
     android:background="@drawable/background_green_yard_with_mountains">
 
     <ImageView
@@ -14,8 +15,33 @@
             android:layout_height="wrap_content"
             android:src="@drawable/canhao_80px"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.708"
-            android:layout_marginStart="56dp" android:contentDescription="@string/game_fragment_cannonball"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.71"
+            android:contentDescription="@string/game_fragment_cannonball" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"/>
+
+    <ImageView
+            android:id="@+id/game_fragment_target"
+            android:layout_width="20dp"
+            android:layout_height="66dp"
+            android:src="@drawable/alvo_circular_65px"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.318"
+            app:layout_constraintHorizontal_bias="0.757"
+            android:contentDescription="@string/game_fragment_target_description"
+            app:layout_constraintStart_toEndOf="@+id/game_fragment_cannonball"/>
+    <ImageButton
+            android:id="@+id/game_fragment_play_botton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/botao_play_hexagonal_90px"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/game_fragment_play_button"/>
 
     <com.google.android.material.slider.Slider
             android:id="@+id/game_fragment_slide_bar_velocity"
@@ -27,26 +53,43 @@
             android:valueTo="80.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/game_fragment_cannonball"
+            app:layout_constraintTop_toBottomOf="@id/game_fragment_cannonball"
             android:layout_marginBottom="48dp"/>
 
-    <ImageView
-            android:id="@+id/game_fragment_target"
-            android:layout_width="20dp"
-            android:layout_height="66dp"
-            android:src="@drawable/alvo_circular_65px"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.908" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.22" android:contentDescription="@string/game_fragment_target_description"/>
-
-    <ImageButton
-            android:id="@+id/game_fragment_play_botton"
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/botao_play_hexagonal_90px"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:contentDescription="@string/game_fragment_play_button"/>
+            android:text="@string/game_fragment_default_vo"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/game_fragment_slide_bar_velocity"
+            app:layout_constraintStart_toEndOf="@id/game_fragment_slide_bar_velocity"
+            app:layout_constraintBottom_toBottomOf="@id/game_fragment_slide_bar_velocity"
+    />
+
+    <com.google.android.material.slider.Slider
+            android:id="@+id/game_fragment_slide_bar_theta"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:valueFrom="2.0"
+            android:valueTo="80.0"
+            app:layout_constraintStart_toStartOf="@+id/game_fragment_cannonball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/game_fragment_cannonball"
+            app:layout_constraintTop_toBottomOf="@id/game_fragment_slide_bar_velocity"
+            app:layout_constraintVertical_bias="0.5"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="theta = 45º"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/game_fragment_slide_bar_theta"
+            app:layout_constraintStart_toEndOf="@id/game_fragment_slide_bar_theta"
+            app:layout_constraintBottom_toBottomOf="@id/game_fragment_slide_bar_theta"
+    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

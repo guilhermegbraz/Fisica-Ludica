@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.view.maplistfragment
+package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding

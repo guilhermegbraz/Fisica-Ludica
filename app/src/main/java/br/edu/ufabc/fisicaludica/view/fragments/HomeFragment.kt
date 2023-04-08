@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.view
+package br.edu.ufabc.fisicaludica.view.fragments
 
 
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.databinding.FragmentHomeBinding
-
+import br.edu.ufabc.fisicaludica.view.fragments.HomeFragmentDirections
 
 
 class HomeFragment() : Fragment() {

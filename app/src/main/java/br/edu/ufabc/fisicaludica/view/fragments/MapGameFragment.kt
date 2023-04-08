@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.view
+package br.edu.ufabc.fisicaludica.view.fragments
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle

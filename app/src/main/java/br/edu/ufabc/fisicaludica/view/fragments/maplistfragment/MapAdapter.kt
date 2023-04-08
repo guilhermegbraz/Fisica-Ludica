@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.view.maplistfragment
+package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 /*
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
