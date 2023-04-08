@@ -3,7 +3,6 @@ package br.edu.ufabc.fisicaludica.view
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -28,6 +27,26 @@ class MainActivity : AppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        bindEvents()
+    }
 
+    fun bindEvents() {
+        binding.mainActivityPauseButton.setOnClickListener {
+
+            val dialog = DialogPause()
+            dialog.show(supportFragmentManager, "pause dialog")
+           /* MaterialAlertDialogBuilder(this)
+                .setTitle("Titulo")
+                .setMessage("Tem certeza que deseja deletar?")
+                .setNeutralButton("Cancelar") { dialog, which ->
+                    Log.d("dialog", "O usuario cancelou a action delete")
+                }
+                .setPositiveButton("Deletar") { dialog, which ->
+                    Log.d("dialog", "O usuario deletou o contato")
+                }
+                .show()
+
+            */
+        }
     }
 }
