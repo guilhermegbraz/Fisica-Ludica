@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,18 +11,34 @@
         android:screenOrientation="landscape"
 >
 
-    <!--    NavHost -->
-    <ImageButton
-            android:id="@+id/main_activity_pause_button"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_question_mark_24"
-            android:background="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:background="@color/black"
+    >
+        <ImageButton
+                android:id="@+id/main_activity_pause_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_question_mark_24"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        <ImageButton
+                android:id="@+id/main_activity_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_40"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    NavHost -->
     <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_fragment_container"
             android:layout_width="match_parent"
@@ -33,4 +49,4 @@
     />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

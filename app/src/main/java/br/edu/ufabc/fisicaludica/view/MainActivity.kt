@@ -32,21 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     fun bindEvents() {
         binding.mainActivityPauseButton.setOnClickListener {
-
             val dialog = DialogPause()
             dialog.show(supportFragmentManager, "pause dialog")
-           /* MaterialAlertDialogBuilder(this)
-                .setTitle("Titulo")
-                .setMessage("Tem certeza que deseja deletar?")
-                .setNeutralButton("Cancelar") { dialog, which ->
-                    Log.d("dialog", "O usuario cancelou a action delete")
-                }
-                .setPositiveButton("Deletar") { dialog, which ->
-                    Log.d("dialog", "O usuario deletou o contato")
-                }
-                .show()
-
-            */
         }
+        binding.mainActivityBackButton.setOnClickListener { onBackPressed() }
     }
 }
