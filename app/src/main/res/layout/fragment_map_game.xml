@@ -14,11 +14,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/canhao_80px"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.71"
-            android:contentDescription="@string/game_fragment_cannonball" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.062"/>
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.647"
+            android:contentDescription="@string/game_fragment_cannonball"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.057"/>
     <ImageView
             android:id="@+id/game_fragment_target"
             android:layout_width="20dp"
@@ -57,6 +59,7 @@
             android:layout_marginBottom="48dp"/>
 
     <TextView
+            android:id="@+id/game_fragment_textview_velocity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/game_fragment_default_vo"
@@ -81,6 +84,7 @@
             app:layout_constraintTop_toBottomOf="@id/game_fragment_slide_bar_velocity"
             app:layout_constraintVertical_bias="0.5"/>
     <TextView
+            android:id="@+id/game_fragment_textview_theta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="theta = 45º"
@@ -90,6 +94,20 @@
             app:layout_constraintTop_toTopOf="@id/game_fragment_slide_bar_theta"
             app:layout_constraintStart_toEndOf="@id/game_fragment_slide_bar_theta"
             app:layout_constraintBottom_toBottomOf="@id/game_fragment_slide_bar_theta"
+    />
+
+    <TextView
+            android:id="@+id/game_fragment_textview_coordinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coordenada (aX, bY)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/game_fragment_play_botton"
+            app:layout_constraintStart_toStartOf="@id/game_fragment_target"
+            app:layout_constraintBottom_toBottomOf="@id/game_fragment_target"
+            app:layout_constraintEnd_toEndOf="@id/game_fragment_target"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
