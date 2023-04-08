@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/destination_home"
-              android:name="br.edu.ufabc.fisicaludica.view.HomeFragment"
+              android:name="br.edu.ufabc.fisicaludica.view.fragments.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/destination_map_list"
-        android:name="br.edu.ufabc.fisicaludica.view.maplistfragment.MapListFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.MapListFragment"
         android:label="fragment_map_list"
         tools:layout="@layout/fragment_map_list">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/mapGameFragment"
-        android:name="br.edu.ufabc.fisicaludica.view.MapGameFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.MapGameFragment"
         android:label="fragment_map_game"
         tools:layout="@layout/fragment_map_game">
 

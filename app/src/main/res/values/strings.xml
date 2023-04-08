@@ -8,4 +8,8 @@
     <string name="game_fragment_target_description">Target to be hited</string>
     <string name="game_fragment_cannonball">cannonball</string>
     <string name="game_fragment_play_button">button to play the game</string>
+    <string name="game_fragment_default_vo">Vo = 2 m/s</string>
+    <string name="dialog_hint_pause_title">PAUSE</string>
+    <string name="dialog_hint_pause_exit_button_string">X</string>
+    <string name="dialog_hint_pause_textView_in_scroll">Deafult hint for examle</string>
 </resources>
