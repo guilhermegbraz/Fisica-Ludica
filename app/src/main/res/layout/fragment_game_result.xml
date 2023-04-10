@@ -73,7 +73,7 @@
                     android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/result_game_fragment_secundary_default_message"
-            />
+                    android:contentDescription="@string/go_to_map_list_imagebutton"/>
             <TextView
                     android:id="@+id/result_game_fragment_back_to_list_message"
                     android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                     app:layout_constraintTop_toBottomOf="@id/result_game_fragment_back_to_list_button"
                     app:layout_constraintStart_toStartOf="@id/result_game_fragment_back_to_list_button"
                     app:layout_constraintEnd_toEndOf="@id/result_game_fragment_back_to_list_button"
-            />
+                    tools:ignore="SmallSp"/>
             <ImageButton
                     android:id="@+id/result_game_fragment_re_do_button"
                     android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
                     android:layout_marginStart="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/result_game_fragment_secundary_default_message"
-            />
+                    android:contentDescription="@string/re_do_image_button"/>
             <TextView
                     android:id="@+id/result_game_fragment_re_do_message"
                     android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
                     app:layout_constraintTop_toBottomOf="@id/result_game_fragment_re_do_button"
                     app:layout_constraintStart_toStartOf="@id/result_game_fragment_re_do_button"
                     app:layout_constraintEnd_toEndOf="@id/result_game_fragment_re_do_button"
-            />
+                    tools:ignore="SmallSp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
