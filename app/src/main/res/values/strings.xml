@@ -11,7 +11,8 @@
     <string name="game_fragment_default_vo">Vo = 2 m/s</string>
     <string name="dialog_hint_pause_title">PAUSE</string>
     <string name="dialog_hint_pause_exit_button_string">X</string>
-    <string name="dialog_hint_pause_textView_in_scroll">Deafult hint for examle</string>
+    <string name="dialog_hint_pause_default_textView_inside_scroll_area">Deafult hint for examle</string>
+    <string name="dialog_hint_pause_textView_inside_scroll_area">%s</string>
     <string name="image_for_result_game_card">Image for representing the result of the game level</string>
     <string name="default_main_message_for_result_game">Default Main Message for the Result Game</string>
     <string name="default_secundary_message_for_result_game">Default secundary message for result game</string>
@@ -19,4 +20,14 @@
     <string name="try_again">try again</string>
     <string name="go_to_map_list_imagebutton">go to map list imageButton</string>
     <string name="re_do_image_button">re do image button</string>
+    <string name="question_mark_for_open_the_pause_dialog">question mark for open the pause dialog</string>
+    <string name="back_button_arrow_for_the_navigation_menu">back button arrow for the navigation menu</string>
+    <string name="arrow_to_get_the_next_hint_for_the_dialog_pause">arrow to get the next hint for the dialog pause
+    </string>
+    <string name="closing_button_for_the_pause_dialog">closing button for the pause dialog</string>
+    <string name="arrow_to_get_the_previous_hint_for_the_dialog_pause">arrow to get the previous hint for the dialog
+        pause
+    </string>
+    <string name="game_fragment_default_angle">angulo inicial = 45º</string>
+    <string name="game_fragment_default_coordinate">coordenada (aX, bY)</string>
 </resources>

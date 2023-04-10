@@ -5,14 +5,23 @@ import br.edu.ufabc.fisicaludica.domain.Map
 import com.beust.klaxon.Klaxon
 import java.io.InputStream
 
+/**
+ * repository for maps.
+ */
 class MapRepository (private val mapDtoToMapParser: MapDtoToMap){
     private lateinit var maps: List<Map>
 
+    /**
+     * load and parse the data.
+     */
     fun loadData(inputStream: InputStream) {
         maps = Klaxon().parseArray<MapDto>(inputStream)?.map { this.mapDtoToMapParser.execute(it) } ?: emptyList()
 
     }
 
+    /**
+     * get all the maps.
+     */
     fun getAll(): List<Map> = if (this::maps.isInitialized) maps else {
         Log.d(
             "error",
@@ -21,6 +30,9 @@ class MapRepository (private val mapDtoToMapParser: MapDtoToMap){
         throw Exception("Didn't found any Notes")
     }
 
+    /**
+     * get map by id.
+     */
     fun getMapById(id: Long): Map {
         return maps.find { it.id == id }
             ?: throw IllegalArgumentException("Didn't found the map you're looking for").also {

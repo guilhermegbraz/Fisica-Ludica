@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import br.edu.ufabc.fisicaludica.databinding.ActivityMainBinding
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
+/**
+ * Física Lúdica's main activity.
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
@@ -30,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         bindEvents()
     }
 
-    fun bindEvents() {
+    @Suppress("DEPRECATION")
+    private fun bindEvents() {
         binding.mainActivityPauseButton.setOnClickListener {
             val dialog = DialogPause()
             dialog.show(supportFragmentManager, "pause dialog")

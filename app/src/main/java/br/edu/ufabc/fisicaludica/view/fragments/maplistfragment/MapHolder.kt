@@ -3,6 +3,9 @@ package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 
+/**
+ * RecyclerView holder.
+ */
 class MapHolder(itemBinding: MapListItemBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
     /**
@@ -16,7 +19,7 @@ class MapHolder(itemBinding: MapListItemBinding) :
     val title = itemBinding.mapListItemCardTitle
 
     /**
-     * image preview.
+     * Game map image preview.
      */
     val imageView = itemBinding.mapListItemCardImage
 

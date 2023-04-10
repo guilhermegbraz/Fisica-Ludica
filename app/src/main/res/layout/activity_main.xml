@@ -24,7 +24,7 @@
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                android:contentDescription="@string/question_mark_for_open_the_pause_dialog"/>
         <ImageButton
                 android:id="@+id/main_activity_back_button"
                 android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:background="@android:color/transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-        />
+                android:contentDescription="@string/back_button_arrow_for_the_navigation_menu"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,5 +1,8 @@
 package br.edu.ufabc.fisicaludica.domain
 
+/**
+ * domain class for game map.
+ */
 class Map (id:Long, backgroud: String, title: String) {
      var id: Long
         private set
