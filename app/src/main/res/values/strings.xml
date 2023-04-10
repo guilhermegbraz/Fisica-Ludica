@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Fisica Ludica</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_image_view_logo_description">app logo in the home fragment</string>
+    <string name="home_fragment_image_button_start_description">image button for start to play</string>
+    <string name="map_list_item_preview_card_image_of_the_map">Preview image of the map</string>
+    <string name="game_fragment_target_description">Target to be hited</string>
+    <string name="game_fragment_cannonball">cannonball</string>
+    <string name="game_fragment_play_button">button to play the game</string>
+    <string name="game_fragment_default_vo">Vo = 2 m/s</string>
+    <string name="dialog_hint_pause_title">PAUSE</string>
+    <string name="dialog_hint_pause_exit_button_string">X</string>
+    <string name="dialog_hint_pause_textView_in_scroll">Deafult hint for examle</string>
+    <string name="image_for_result_game_card">Image for representing the result of the game level</string>
+    <string name="default_main_message_for_result_game">Default Main Message for the Result Game</string>
+    <string name="default_secundary_message_for_result_game">Default secundary message for result game</string>
+    <string name="back_to_map_list">back to map list</string>
+    <string name="try_again">try again</string>
+    <string name="go_to_map_list_imagebutton">go to map list imageButton</string>
+    <string name="re_do_image_button">re do image button</string>
 </resources>

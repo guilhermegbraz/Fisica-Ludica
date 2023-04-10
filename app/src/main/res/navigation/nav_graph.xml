@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/destination_home">
+
+    <fragment
+            android:id="@+id/destination_home"
+              android:name="br.edu.ufabc.fisicaludica.view.fragments.HomeFragment"
+              android:label="fragment_home"
+              tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/show_map_list"
+                app:destination="@id/destination_map_list"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_map_list"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.MapListFragment"
+        android:label="fragment_map_list"
+        tools:layout="@layout/fragment_map_list">
+        <action
+            android:id="@+id/goToGameFragment"
+            app:destination="@id/mapGameFragment"
+        />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapGameFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.MapGameFragment"
+        android:label="fragment_map_game"
+        tools:layout="@layout/fragment_map_game">
+
+        <action android:id="@+id/backToMapList"
+                app:destination="@id/destination_map_list"/>
+        <action android:id="@+id/gameResult"
+                app:destination="@id/gameResultFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/gameResultFragment"
+            android:name="br.edu.ufabc.fisicaludica.view.fragments.GameResultFragment"
+            android:label="fragment_game_result"
+            tools:layout="@layout/fragment_game_result">
+
+        <argument
+                android:name="gameplayResult"
+                app:argType="boolean"/>
+        <action
+                android:id="@+id/resultGameMapList"
+                app:destination="@id/destination_map_list"/>
+
+        <action
+                android:id="@+id/resultGameTryAgain"
+                app:destination="@id/mapGameFragment"/>
+    </fragment>
+</navigation>
