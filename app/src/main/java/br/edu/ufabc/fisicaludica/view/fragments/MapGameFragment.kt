@@ -18,7 +18,7 @@ class MapGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMapGameBinding.inflate(inflater, container, false)
 
         return binding.root
