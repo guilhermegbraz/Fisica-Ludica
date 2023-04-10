@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.databinding.FragmentMapGameBinding
 import br.edu.ufabc.fisicaludica.domain.Map
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
@@ -25,11 +26,29 @@ class MapGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setBackground()
+        bindEvents()
 
+    }
+
+    private fun setBackground() {
         viewModel.clickedMapId.value?.let {
             val gameMap: Map = viewModel.getMapById(it)
             binding.fragmentGameMapLayout.background =
                 Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameMap),gameMap.backgroud)
+        }
+    }
+
+    private fun bindEvents() {
+        binding.gameFragmentPlayBotton.setOnClickListener {
+            MapGameFragmentDirections.gameResult(binding.gameFragmentSlideBarVelocity.value == 2.0F)
+                .let {
+                    findNavController().navigate(it)
+                }
+        }
+        binding.gameFragmentSlideBarVelocity.addOnChangeListener { _, value, _ ->
+            val velocity = value.toString() + "m/s"
+            binding.gameFragmentTextviewVelocity.text = velocity
         }
     }
 }
