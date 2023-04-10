@@ -2,12 +2,10 @@ package br.edu.ufabc.fisicaludica.view
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
-import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.DialogPauseBinding
 
 class DialogPause(): DialogFragment() {

@@ -12,4 +12,11 @@
     <string name="dialog_hint_pause_title">PAUSE</string>
     <string name="dialog_hint_pause_exit_button_string">X</string>
     <string name="dialog_hint_pause_textView_in_scroll">Deafult hint for examle</string>
+    <string name="image_for_result_game_card">Image for representing the result of the game level</string>
+    <string name="default_main_message_for_result_game">Default Main Message for the Result Game</string>
+    <string name="default_secundary_message_for_result_game">Default secundary message for result game</string>
+    <string name="back_to_map_list">back to map list</string>
+    <string name="try_again">try again</string>
+    <string name="go_to_map_list_imagebutton">go to map list imageButton</string>
+    <string name="re_do_image_button">re do image button</string>
 </resources>
