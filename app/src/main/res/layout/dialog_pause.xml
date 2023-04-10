@@ -29,7 +29,7 @@
             app:layout_constraintStart_toEndOf="@+id/dialog_hint_pause_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/dialog_hint_pause_title"
-            app:layout_constraintHorizontal_bias="0.743"/>
+            app:layout_constraintHorizontal_bias="0.743" android:contentDescription="@string/closing_button_for_the_pause_dialog"/>
 
     <ScrollView
             android:id="@+id/dialog_hint_pause_scroll_area"
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:gravity="center"
-                        android:text="@string/dialog_hint_pause_textView_in_scroll"
+                        android:text="@string/dialog_hint_pause_default_textView_inside_scroll_area"
                         />
     </ScrollView>
 
@@ -63,7 +63,7 @@
             app:layout_constraintStart_toEndOf="@id/dialog_hint_pause_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-    />
+            android:contentDescription="@string/arrow_to_get_the_next_hint_for_the_dialog_pause"/>
 
     <ImageButton
             android:id="@+id/dialog_hint_pause_previus_hint"
@@ -76,6 +76,6 @@
             app:layout_constraintEnd_toStartOf="@id/dialog_hint_pause_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-    />
+            android:contentDescription="@string/arrow_to_get_the_previous_hint_for_the_dialog_pause"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,9 @@ import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 import br.edu.ufabc.fisicaludica.domain.Map
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
+/**
+ * Fragment for list the game maps.
+ */
 class MapListFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding:FragmentMapListBinding
@@ -28,7 +31,10 @@ class MapListFragment : Fragment() {
         return binding.root
     }
 
-    inner class MapAdapter(private val maps:List<Map>, val viewModel: MainViewModel): RecyclerView.Adapter<MapHolder>() {
+    /**
+     * RecyclerView dapter.
+     */
+    inner class MapAdapter(private val maps:List<Map>): RecyclerView.Adapter<MapHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapHolder =
             MapHolder(
                 MapListItemBinding.inflate(
@@ -55,7 +61,7 @@ class MapListFragment : Fragment() {
         super.onStart()
         binding.recyclerviewMapList.layoutManager = GridLayoutManager(context, 3)
         binding.recyclerviewMapList.apply {
-            adapter = MapAdapter(viewModel.getAllMaps(), viewModel)
+            adapter = MapAdapter(viewModel.getAllMaps())
         }
 
     }

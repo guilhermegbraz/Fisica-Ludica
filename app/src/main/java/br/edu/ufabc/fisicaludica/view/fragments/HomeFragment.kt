@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.databinding.FragmentHomeBinding
-import br.edu.ufabc.fisicaludica.view.fragments.HomeFragmentDirections
 
-
-class HomeFragment() : Fragment() {
+/**
+ * Home fragment.
+ */
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

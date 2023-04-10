@@ -12,6 +12,9 @@ import br.edu.ufabc.fisicaludica.databinding.FragmentMapGameBinding
 import br.edu.ufabc.fisicaludica.domain.Map
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
+/**
+ * Fragment for the game input data stage.
+ */
 class MapGameFragment : Fragment() {
     private lateinit var binding: FragmentMapGameBinding
     private val viewModel: MainViewModel by activityViewModels()

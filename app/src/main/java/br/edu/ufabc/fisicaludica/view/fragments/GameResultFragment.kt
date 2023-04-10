@@ -11,7 +11,9 @@ import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameResultBinding
 
-
+/**
+ * Fragment for the game result.
+ */
 class GameResultFragment : Fragment() {
 
     private lateinit var binding: FragmentGameResultBinding
@@ -28,7 +30,6 @@ class GameResultFragment : Fragment() {
     }
 
     private fun createView() {
-
         context?.let {context->
             if(args.gameplayResult) {
                 binding.gameResultFragmentLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.green_dark))

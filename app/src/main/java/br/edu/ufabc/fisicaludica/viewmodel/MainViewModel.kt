@@ -11,14 +11,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.InputStream
 
+/**
+ * Main viewModel.
+ */
 class MainViewModel(application: Application) : AndroidViewModel(application){
 
+    /**
+     * id of the clicked map
+     */
     val clickedMapId by lazy {
         MutableLiveData<Long?>()
     }
 
     private val app: Application
-    val mapRepository = MapRepository(MapDtoToMap())
+    private val mapRepository = MapRepository(MapDtoToMap())
     companion object {
         const val mapsJson = "maps.json"
     }
@@ -32,9 +38,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
         }
     }
 
+    /**
+     * get all the game maps.
+     */
     fun getAllMaps() = mapRepository.getAll()
 
+    /**
+     * open inputStream for the map image.
+     */
     fun getMapBackgroundInputStream(map: Map): InputStream = app.resources.assets.open(map.backgroud)
 
+    /**
+     * get a map by id.
+     */
     fun getMapById(id: Long): Map = mapRepository.getMapById(id)
 }
