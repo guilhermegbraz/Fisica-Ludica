@@ -18,6 +18,7 @@
             android:layout_marginTop="40dp"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:fontFamily="@font/games"
             />
     <ImageButton
             android:id="@+id/dialog_hint_pause_exit_button"
@@ -25,10 +26,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_close_24"
             android:background="@android:color/transparent"
-            app:layout_constraintTop_toTopOf="@+id/dialog_hint_pause_title"
+            android:layout_marginTop="2dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dialog_hint_pause_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/dialog_hint_pause_title"
+            app:layout_constraintBottom_toTopOf="@id/dialog_hint_pause_title"
             app:layout_constraintHorizontal_bias="0.743" android:contentDescription="@string/closing_button_for_the_pause_dialog"/>
 
     <ScrollView
@@ -47,8 +49,9 @@
                         android:id="@+id/dialog_hint_pause_textview_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_margin="12dp"
                         android:gravity="center"
+                        android:fontFamily="@font/games"
                         android:text="@string/dialog_hint_pause_default_textView_inside_scroll_area"
                         />
     </ScrollView>
