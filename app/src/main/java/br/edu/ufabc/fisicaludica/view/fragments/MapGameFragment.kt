@@ -50,8 +50,12 @@ class MapGameFragment : Fragment() {
                 }
         }
         binding.gameFragmentSlideBarVelocity.addOnChangeListener { _, value, _ ->
-            val velocity = value.toString() + "m/s"
+            val velocity = "$value m/s"
             binding.gameFragmentTextviewVelocity.text = velocity
+        }
+        binding.gameFragmentSlideBarTheta.addOnChangeListener { _, value, _ ->
+            val angle = "$value m/s"
+            binding.gameFragmentTextviewTheta.text = angle
         }
     }
 }

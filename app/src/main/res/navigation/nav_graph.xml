@@ -48,10 +48,16 @@
                 app:argType="boolean"/>
         <action
                 android:id="@+id/resultGameMapList"
-                app:destination="@id/destination_map_list"/>
+                app:destination="@id/destination_map_list"
+                app:popUpTo="@id/destination_map_list"
+                app:popUpToInclusive="true"
+        />
 
         <action
                 android:id="@+id/resultGameTryAgain"
-                app:destination="@id/mapGameFragment"/>
+                app:destination="@id/mapGameFragment"
+                app:popUpTo="@id/mapGameFragment"
+                app:popUpToInclusive="true"
+        />
     </fragment>
 </navigation>

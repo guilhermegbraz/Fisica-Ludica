@@ -48,14 +48,12 @@ class GameResultFragment : Fragment() {
         binding.resultGameFragmentReDoButton.setOnClickListener {
             GameResultFragmentDirections.resultGameTryAgain().let {
                 findNavController().navigate(it)
-                //ToDo: consertar bug da stack/ não empilhar a tela de resultado na stack
             }
         }
 
         binding.resultGameFragmentBackToListButton.setOnClickListener {
             GameResultFragmentDirections.resultGameMapList().let {
                 findNavController().navigate(it)
-                //ToDo: consertar bug da stack/ não empilhar a tela de resultado na stack
             }
         }
     }
