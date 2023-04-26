@@ -69,6 +69,7 @@
             app:layout_constraintTop_toTopOf="@id/game_fragment_slide_bar_velocity"
             app:layout_constraintStart_toEndOf="@id/game_fragment_slide_bar_velocity"
             app:layout_constraintBottom_toBottomOf="@id/game_fragment_slide_bar_velocity"
+            android:fontFamily="@font/games"
     />
 
     <com.google.android.material.slider.Slider
@@ -94,6 +95,7 @@
             app:layout_constraintTop_toTopOf="@id/game_fragment_slide_bar_theta"
             app:layout_constraintStart_toEndOf="@id/game_fragment_slide_bar_theta"
             app:layout_constraintBottom_toBottomOf="@id/game_fragment_slide_bar_theta"
+            android:fontFamily="@font/games"
     />
 
     <TextView
@@ -108,6 +110,7 @@
             app:layout_constraintStart_toStartOf="@id/game_fragment_target"
             app:layout_constraintBottom_toBottomOf="@id/game_fragment_target"
             app:layout_constraintEnd_toEndOf="@id/game_fragment_target"
+            android:fontFamily="@font/games_italic"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
