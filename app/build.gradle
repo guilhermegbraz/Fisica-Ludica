@@ -61,6 +61,7 @@ dependencies {
     api "com.soywiz.korlibs.korau:korau-android:$korge_version"
     api "com.soywiz.korlibs.kds:kds-android:$korge_version"
     api "com.soywiz.korlibs.korma:korma-android:$korge_version"
+    api "com.soywiz.korlibs.korge2:korge-box2d-android:$korge_version"
 
 
     testImplementation 'junit:junit:4.13.2'
