@@ -1,12 +1,19 @@
 package br.edu.ufabc.fisicaludica.view
 
 import android.content.pm.ActivityInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 import androidx.lifecycle.ViewModelProvider
+import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.ActivityMainBinding
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
@@ -24,21 +31,43 @@ class MainActivity : AppCompatActivity() {
 
         val windowInsetsController =
             WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
         supportActionBar?.hide()
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        bindEvents()
+        //bindEvents()
+
+        val display = DisplayMetrics()
+
+        this.windowManager?.defaultDisplay?.getMetrics(display)
+        val width = display.widthPixels
+        val height = display.heightPixels
+        Log.d("tela activity", "As dimensoes na activity são (${width}, ${height})")
+        binding.appBarMain.visibility = View.GONE
+        bindAppBar()
+
     }
 
-    @Suppress("DEPRECATION")
-    private fun bindEvents() {
-        binding.mainActivityPauseButton.setOnClickListener {
-            val dialog = DialogPause()
-            dialog.show(supportFragmentManager, "pause dialog")
+    private fun bindAppBar() {
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressed()
         }
-        binding.mainActivityBackButton.setOnClickListener { onBackPressed() }
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.main_activity_pause_button->{
+                    val dialog = DialogPause()
+                    dialog.show(supportFragmentManager, "pause dialog")
+                    true
+                }
+                else -> false
+            }
+        }
     }
+
 }
