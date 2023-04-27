@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+
+    <item
+            android:id="@+id/main_activity_pause_button"
+            android:icon="@drawable/baseline_question_mark_24"
+            app:showAsAction="always"
+            android:contentDescription="@string/question_mark_for_open_the_pause_dialog"
+            android:title="dica"/>
+    />
+</menu>
