@@ -27,6 +27,12 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(it)
             }
         }
+
+        binding.buttonKorgeView.setOnClickListener {
+            HomeFragmentDirections.showKorgeScene().let {
+                findNavController().navigate(it)
+            }
+        }
     }
 
 

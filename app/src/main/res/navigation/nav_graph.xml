@@ -12,6 +12,9 @@
         <action
                 android:id="@+id/show_map_list"
                 app:destination="@id/destination_map_list"/>
+
+        <action android:id="@+id/show_korge_scene"
+                app:destination="@id/korgeGameViewFragment"/>
     </fragment>
 
     <fragment
@@ -60,4 +63,7 @@
                 app:popUpToInclusive="true"
         />
     </fragment>
+    <fragment android:id="@+id/korgeGameViewFragment"
+              android:name="br.edu.ufabc.fisicaludica.view.korge.KorgeGameViewFragment"
+              android:label="fragment_korge_game_view" tools:layout="@layout/fragment_korge_game_view"/>
 </navigation>
