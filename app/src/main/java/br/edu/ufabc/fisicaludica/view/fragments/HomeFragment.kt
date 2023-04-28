@@ -28,11 +28,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.buttonKorgeView.setOnClickListener {
-            HomeFragmentDirections.showKorgeScene().let {
-                findNavController().navigate(it)
-            }
-        }
     }
 
 

@@ -44,7 +44,8 @@ class MapGameFragment : Fragment() {
 
     private fun bindEvents() {
         binding.gameFragmentPlayBotton.setOnClickListener {
-            MapGameFragmentDirections.gameResult(binding.gameFragmentSlideBarVelocity.value == 2.0F)
+            MapGameFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
+                binding.gameFragmentSlideBarTheta.value)
                 .let {
                     findNavController().navigate(it)
                 }
