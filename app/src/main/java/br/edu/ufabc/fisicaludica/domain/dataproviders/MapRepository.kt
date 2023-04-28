@@ -3,6 +3,7 @@ package br.edu.ufabc.fisicaludica.domain.dataproviders
 import android.util.Log
 import br.edu.ufabc.fisicaludica.domain.Map
 import com.beust.klaxon.Klaxon
+import com.beust.klaxon.KlaxonException
 import java.io.InputStream
 
 /**
@@ -15,8 +16,11 @@ class MapRepository (private val mapDtoToMapParser: MapDtoToMap){
      * load and parse the data.
      */
     fun loadData(inputStream: InputStream) {
-        maps = Klaxon().parseArray<MapDto>(inputStream)?.map { this.mapDtoToMapParser.execute(it) } ?: emptyList()
-
+        try {
+            maps = Klaxon().parseArray<MapDto>(inputStream)?.map { this.mapDtoToMapParser.execute(it) } ?: emptyList()
+        } catch (exception: KlaxonException) {
+            Log.d("klaxon", "Failed to parse json file")
+        }
     }
 
     /**
