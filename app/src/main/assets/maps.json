@@ -2,41 +2,122 @@
 	{
 		"id": 1,
 		"background": "background_green_yard_with_mountains.png",
-		"title": "Fase 1"
+		"title": "Fase 1",
+		"widthInMeters": 53,
+		"groundPosition" : 0.76,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
+
 	},
 	{
 		"id": 2,
 		"background": "background_green_yard_with_mountains2.png",
-		"title": "Fase 2"
+		"title": "Fase 2",
+		"widthInMeters": 40,
+		"groundPosition" : 0.8,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 35,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 3,
 		"background": "background_green_yard_with_mountains3.png",
-		"title": "Fase 3"
+		"title": "Fase 3",
+		"widthInMeters": 80,
+		"groundPosition" : 0.81,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 4,
 		"background": "moon_surfice1.png",
-		"title": "Fase 4"
+		"title": "Fase 4",
+		"widthInMeters": 55,
+		"groundPosition" : 0.71,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 5,
 		"background": "moon_surfice2.png",
-		"title": "Fase 5"
+		"title": "Fase 5",
+		"widthInMeters": 55,
+		"groundPosition" : 0.707,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 6,
 		"background": "urban_city2.png",
-		"title": "Fase 6: cidade"
+		"title": "Fase 6: cidade",
+		"widthInMeters": 55,
+		"groundPosition" : 0.86,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 7,
 		"background": "urban_city3.png",
-		"title": "Fase 7"
+		"title": "Fase 7",
+		"widthInMeters": 55,
+		"groundPosition" : 0.61,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	},
 	{
 		"id": 8,
 		"background": "urbancity.png",
-		"title": "Fase final"
+		"title": "Fase final",
+		"widthInMeters": 55,
+		"groundPosition" : 0.75,
+		"launcherPositionX" : 2,
+		"launchetPositionY" : 0.76,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngle" : 45,
+		"isAngleVariable": false
 	}
 ]
