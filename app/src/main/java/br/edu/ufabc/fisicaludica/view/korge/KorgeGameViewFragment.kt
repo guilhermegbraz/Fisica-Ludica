@@ -15,7 +15,9 @@ import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
 import br.edu.ufabc.fisicaludica.domain.GameGuess
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.soywiz.klock.TimeSpan
 import com.soywiz.korge.android.KorgeAndroidView
+import com.soywiz.korio.async.delay
 
 class KorgeGameViewFragment : Fragment() {
     lateinit var binding: FragmentKorgeGameViewBinding
@@ -23,24 +25,23 @@ class KorgeGameViewFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     val args: KorgeGameViewFragmentArgs by navArgs()
 
-    private lateinit var myModule:  CustomModule
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         binding = FragmentKorgeGameViewBinding.inflate(inflater,container, false)
-
+        korgeAndroidView = KorgeAndroidView(requireContext())
+        binding.toolContainer.addView(korgeAndroidView)
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        korgeAndroidView = KorgeAndroidView(requireContext())
-        binding.toolContainer.addView(korgeAndroidView)
-        loadToolModule()
+
         bindEvents()
-        korgeAndroidView.loadModule(myModule)
+
+        loadToolModule()
     }
     private fun bindEvents() {
         binding.fragmentGameWindowContinueButton.setOnClickListener {
@@ -62,9 +63,10 @@ class KorgeGameViewFragment : Fragment() {
             val guess = GameGuess(args.initialVelocity.toDouble(), args.initialAngle.toDouble())
             val gameMap =   this.viewModel.getMapById(it)
 
-            myModule = CustomModule(width = width, height = height, gameMap, guess, callback = {
+            val myModule = CustomModule(width = width, height = height, gameMap, guess, callback = {
                 println("Callback from android app") },
             )
+            korgeAndroidView.loadModule(myModule)
         }
     }
 
