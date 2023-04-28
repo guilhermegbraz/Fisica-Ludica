@@ -8,13 +8,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
+import br.edu.ufabc.fisicaludica.domain.GameGuess
+import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 import com.soywiz.korge.android.KorgeAndroidView
 
 class KorgeGameViewFragment : Fragment() {
     lateinit var binding: FragmentKorgeGameViewBinding
     private lateinit var korgeAndroidView: KorgeAndroidView
+    private val viewModel: MainViewModel by activityViewModels()
+    val args: KorgeGameViewFragmentArgs by navArgs()
 
+    private lateinit var myModule:  CustomModule
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,25 +38,16 @@ class KorgeGameViewFragment : Fragment() {
         super.onStart()
         korgeAndroidView = KorgeAndroidView(requireContext())
         binding.toolContainer.addView(korgeAndroidView)
-
-        binding.loadViewButton.setOnClickListener {
-            binding.loadViewButton.isEnabled = false
-            binding.unloadViewButton.isEnabled = true
-            loadToolModule()
-        }
-
-        binding.unloadViewButton.setOnClickListener {
-            binding.loadViewButton.isEnabled = true
-            binding.unloadViewButton.isEnabled = false
-            unloadToolModule()
-        }
+        loadToolModule()
+        bindEvents()
+        korgeAndroidView.loadModule(myModule)
     }
-
-    override fun onResume() {
-        super.onResume()
-        binding.loadViewButton.isEnabled = true
-        binding.unloadViewButton.isEnabled = false
-
+    private fun bindEvents() {
+        binding.fragmentGameWindowContinueButton.setOnClickListener {
+            KorgeGameViewFragmentDirections.showGameResult(true).let {
+                findNavController().navigate(it)
+            }
+        }
     }
 
     private fun loadToolModule() {
@@ -57,13 +57,15 @@ class KorgeGameViewFragment : Fragment() {
         val width = display.widthPixels
         val height = display.heightPixels
         Log.d("tela frag", "As dimensoes no fragment são (${width}, ${height})")
-        korgeAndroidView.loadModule(CustomModule(width = width, height = height, callback = {
-            println("Callback from android app")
-        }))
-    }
 
-    private fun unloadToolModule() {
-        korgeAndroidView.unloadModule()
+        viewModel.clickedMapId.value?.let {
+            val guess = GameGuess(args.initialVelocity.toDouble(), args.initialAngle.toDouble())
+            val gameMap =   this.viewModel.getMapById(it)
+
+            myModule = CustomModule(width = width, height = height, gameMap, guess, callback = {
+                println("Callback from android app") },
+            )
+        }
     }
 
 }
