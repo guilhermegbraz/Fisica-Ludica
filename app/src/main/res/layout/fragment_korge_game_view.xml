@@ -12,6 +12,7 @@
             android:id="@+id/fragment_game_window_continue_button"
             android:layout_width="wrap_content"
             android:src="@drawable/baseline_fast_forward_35"
+            android:backgroundTint="@color/honey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
