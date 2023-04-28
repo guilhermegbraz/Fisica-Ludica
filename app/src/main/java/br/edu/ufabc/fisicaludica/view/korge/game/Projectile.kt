@@ -25,5 +25,6 @@ class Projectile(width: Double, height: Double, posX: Number, posY: Number, appl
 
     fun launch(vec2: Vec2) {
         this.projetilObject.body!!.linearVelocity = vec2
+        this.projetilObject.body!!.angularVelocity = 5.0F
     }
 }
