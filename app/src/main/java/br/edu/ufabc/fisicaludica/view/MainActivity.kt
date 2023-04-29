@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
         supportActionBar?.hide()
-        binding.appBarMain.visibility = View.GONE
+        //binding.appBarMain.visibility = View.GONE
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
