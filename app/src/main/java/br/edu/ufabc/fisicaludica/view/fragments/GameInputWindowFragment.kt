@@ -9,21 +9,21 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import br.edu.ufabc.fisicaludica.databinding.FragmentMapGameBinding
+import br.edu.ufabc.fisicaludica.databinding.FragmentGameInputWindowBinding
 import br.edu.ufabc.fisicaludica.domain.Map
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 /**
  * Fragment for the game input data stage.
  */
-class MapGameFragment : Fragment() {
-    private lateinit var binding: FragmentMapGameBinding
+class GameInputWindowFragment : Fragment() {
+    private lateinit var binding: FragmentGameInputWindowBinding
     private val viewModel: MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMapGameBinding.inflate(inflater, container, false)
+        binding = FragmentGameInputWindowBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -31,7 +31,7 @@ class MapGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBackground()
-        setElementsPosition()
+        setElementsState()
         bindEvents()
     }
 
@@ -42,9 +42,15 @@ class MapGameFragment : Fragment() {
                 Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameMap),gameMap.backgroud)
         }
     }
-    private fun setElementsPosition() {
+    private fun setElementsState() {
         viewModel.clickedMapId.value?.let {
             val gameMap: Map = viewModel.getMapById(it)
+
+            binding.gameFragmentSlideBarVelocity.value = gameMap.initialVelocity.toFloat()
+            binding.gameFragmentSlideBarTheta.value = gameMap.initialAngleDegrees.toFloat()
+
+            binding.gameFragmentSlideBarVelocity.isEnabled = gameMap.isVelocityVariable
+            binding.gameFragmentSlideBarTheta.isEnabled = gameMap.isAngleVariable
             val layoutParams = binding.gameFragmentCannonball.layoutParams as ConstraintLayout.LayoutParams
             layoutParams.horizontalBias =  gameMap.posXLauncher.toFloat() / gameMap.widthMeters.toFloat()
 
@@ -53,7 +59,7 @@ class MapGameFragment : Fragment() {
 
     private fun bindEvents() {
         binding.gameFragmentPlayBotton.setOnClickListener {
-            MapGameFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
+            GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
                 binding.gameFragmentSlideBarTheta.value)
                 .let {
                     findNavController().navigate(it)

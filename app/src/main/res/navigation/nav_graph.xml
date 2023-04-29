@@ -22,15 +22,15 @@
         tools:layout="@layout/fragment_map_list">
         <action
             android:id="@+id/goToGameFragment"
-            app:destination="@id/mapGameFragment"
+            app:destination="@id/gameInputWindowFragment"
         />
     </fragment>
 
     <fragment
-        android:id="@+id/mapGameFragment"
-        android:name="br.edu.ufabc.fisicaludica.view.fragments.MapGameFragment"
+        android:id="@+id/gameInputWindowFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.GameInputWindowFragment"
         android:label="fragment_map_game"
-        tools:layout="@layout/fragment_map_game">
+        tools:layout="@layout/fragment_game_input_window">
 
         <action android:id="@+id/backToMapList"
                 app:destination="@id/destination_map_list"/>
@@ -57,8 +57,8 @@
 
         <action
                 android:id="@+id/resultGameTryAgain"
-                app:destination="@id/mapGameFragment"
-                app:popUpTo="@id/mapGameFragment"
+                app:destination="@id/gameInputWindowFragment"
+                app:popUpTo="@id/gameInputWindowFragment"
                 app:popUpToInclusive="true"
         />
     </fragment>
