@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
         val windowInsetsController =
@@ -38,11 +37,9 @@ class MainActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
         supportActionBar?.hide()
-        //binding.appBarMain.visibility = View.GONE
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
 
         bindAppBar()
 
@@ -62,6 +59,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+
+        this.viewModel.isAppBarVisible.observe(this){
+            if(it) binding.appBarMain.visibility = View.VISIBLE
+            else binding.appBarMain.visibility = View.GONE
         }
     }
 

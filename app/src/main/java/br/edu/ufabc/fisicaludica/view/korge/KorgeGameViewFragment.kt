@@ -30,7 +30,6 @@ class KorgeGameViewFragment : Fragment() {
 
         binding = FragmentKorgeGameViewBinding.inflate(inflater,container, false)
         korgeAndroidView = KorgeAndroidView(requireContext())
-        binding.toolContainer.addView(korgeAndroidView)
         return binding.root
     }
 
@@ -41,8 +40,9 @@ class KorgeGameViewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        hideAppBar()
+        binding.toolContainer.addView(korgeAndroidView)
         loadToolModule()
-
     }
 
     private fun bindEvents() {
@@ -54,8 +54,6 @@ class KorgeGameViewFragment : Fragment() {
     }
 
     private fun loadToolModule() {
-
-
         requireView().post {
             val fragmentHeight = requireView().height //height is ready
             val fragmentWidth = requireView().width
@@ -74,15 +72,15 @@ class KorgeGameViewFragment : Fragment() {
                 korgeAndroidView.loadModule(myModule)
             }
         }
+    }
 
-        val display = DisplayMetrics()
-        val fragmentWidth = binding.root.measuredWidth
-        val fragmentHeight = binding.root.measuredHeight
-        activity?.windowManager?.defaultDisplay?.getMetrics(display)
-        val width = display.widthPixels
-        val height = display.heightPixels
-        Log.d("tela frag", "As dimensoes da activity são (${width}, ${height})")
+    private fun hideAppBar() {
+        viewModel.isAppBarVisible.value = false
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.isAppBarVisible.value = true
     }
 
 }

@@ -23,6 +23,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application){
         MutableLiveData<Long?>()
     }
 
+    val isAppBarVisible by lazy {
+        MutableLiveData<Boolean>(true)
+    }
+
     private val app: Application
     private val mapRepository = MapRepository(MapDtoToMap())
     companion object {
