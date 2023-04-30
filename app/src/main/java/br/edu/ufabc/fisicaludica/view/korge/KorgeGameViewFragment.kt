@@ -21,6 +21,7 @@ class KorgeGameViewFragment : Fragment() {
     private lateinit var korgeAndroidView: KorgeAndroidView
     private val viewModel: MainViewModel by activityViewModels()
     val args: KorgeGameViewFragmentArgs by navArgs()
+      var buttonClicked = false
 
 
     override fun onCreateView(
@@ -47,6 +48,7 @@ class KorgeGameViewFragment : Fragment() {
 
     private fun bindEvents() {
         binding.fragmentGameWindowContinueButton.setOnClickListener {
+            this.buttonClicked = true
             KorgeGameViewFragmentDirections.showGameResult(true).let {
                 findNavController().navigate(it)
             }
@@ -57,7 +59,6 @@ class KorgeGameViewFragment : Fragment() {
         requireView().post {
             val fragmentHeight = requireView().height //height is ready
             val fragmentWidth = requireView().width
-            Log.d("tela frag", "As dimensoes do fragmento são (${fragmentWidth}, ${fragmentHeight})")
 
             viewModel.clickedMapId.value?.let {
                 val guess = GameGuess(args.initialVelocity.toDouble(), args.initialAngle.toDouble())
@@ -76,6 +77,12 @@ class KorgeGameViewFragment : Fragment() {
 
     private fun hideAppBar() {
         viewModel.isAppBarVisible.value = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        korgeAndroidView.unloadModule()
+        if (!buttonClicked) binding.fragmentGameWindowContinueButton.performClick()
     }
 
     override fun onDestroyView() {
