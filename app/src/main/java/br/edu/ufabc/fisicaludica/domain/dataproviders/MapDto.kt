@@ -15,4 +15,7 @@ data class MapDto(val id: Long,
                   val initialVelocity: Double,
                   val isVelocityVariable: Boolean,
                   val initialAngleDegrees: Double,
-                  val isAngleVariable: Boolean)
+                  val isAngleVariable: Boolean,
+                  val isTargetHorizontal: Boolean,
+                  val gravityX: Double,
+                  val gravityY: Double)

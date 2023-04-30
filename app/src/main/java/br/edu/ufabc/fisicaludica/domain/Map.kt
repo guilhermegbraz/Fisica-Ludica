@@ -7,7 +7,10 @@ package br.edu.ufabc.fisicaludica.domain
 class Map (id:Long, backgroud: String, title: String, groundPosition: Double, laucherPositionX:Double,
            laucherPositionY: Double, targetPositionX: Double, targetPositionY: Double, linearVelocity: Double,
            isVelocityVariable: Boolean, rotationAngle: Double, isAngleVariable: Boolean,
-           widthMeters: Double) {
+           widthMeters: Double,
+           isTargetHorizontal: Boolean,
+           gravityX: Double,
+           gravityY: Double) {
      var id: Long
         private set
       var backgroud: String
@@ -29,6 +32,14 @@ class Map (id:Long, backgroud: String, title: String, groundPosition: Double, la
     val initialAngleDegrees: Double
     val isAngleVariable: Boolean
 
+    val targetHeight = 4.5
+    val projectileLauncherWidht = 4.5
+    val projectileWidth = 1.2
+
+    val isTargetHorizontal: Boolean
+    val gravityX: Double
+    val gravityY: Double
+
     init {
         this.id = id
         this.backgroud = backgroud
@@ -43,6 +54,8 @@ class Map (id:Long, backgroud: String, title: String, groundPosition: Double, la
         initialVelocity = linearVelocity
         this.isVelocityVariable = isVelocityVariable
         this.widthMeters = widthMeters
-
+        this.isTargetHorizontal = true
+        this.gravityX = gravityX
+        this.gravityY = gravityY
     }
 }
