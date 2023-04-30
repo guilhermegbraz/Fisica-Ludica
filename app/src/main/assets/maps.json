@@ -7,27 +7,33 @@
 		"groundPosition" : 0.76,
 		"posXLauncher" : 2.0,
 		"posYLauncher" : 0.0,
-		"posXTarget" : 49.0,
+		"posXTarget" : 47.0,
 		"posYTarget" : 0.0,
 		"initialVelocity" : 2.0,
 		"isVelocityVariable": true,
 		"initialAngleDegrees" : 45.0,
-		"isAngleVariable": false
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
 
 	},
 	{
 		"id": 2,
 		"background": "background_green_yard_with_mountains2.png",
 		"title": "Fase 2",
-		"widthInMeters": 40,
+		"widthInMeters": 80,
 		"groundPosition" : 0.8,
 		"posXLauncher" : 2.0,
 		"posYLauncher" : 0.0,
 		"posXTarget" : 35.0,
-		"posYTarget" : 0.76,
+		"posYTarget" : 20.0,
 		"initialVelocity" : 2.0,
 		"isVelocityVariable": true,
-		"initialAngleDegrees" : 45.0,
-		"isAngleVariable": false
+		"initialAngleDegrees" : 40.0,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
 	}
 ]
