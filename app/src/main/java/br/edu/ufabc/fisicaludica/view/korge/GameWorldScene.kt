@@ -20,8 +20,11 @@ class GameWorldScene(val gameMap : Map, private val gameGuess: GameGuess) : Scen
         val projectileBitmap = resourcesVfs["maca.png"].readBitmap()
         val launcherBitmap = resourcesVfs["canhao_80px.png"].readBitmap()
         val backgroundBitmap = resourcesVfs[gameMap.backgroud].readBitmap()
+        val targetBitmap = if(gameMap.isTargetHorizontal) resourcesVfs["alvo_circular_deitado.png"].readBitmap()
+            else resourcesVfs["alvo_circular_em_pe.png"].readBitmap()
 
-        val gameWindow = gameWindow(gameMap, projectileBitmap, launcherBitmap, backgroundBitmap, this.width, this.height)
+        val gameWindow = gameWindow( this.width, this.height, gameMap, projectileBitmap,
+            launcherBitmap, backgroundBitmap, targetBitmap)
 
 
         launch {

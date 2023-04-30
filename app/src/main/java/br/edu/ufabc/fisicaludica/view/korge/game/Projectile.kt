@@ -12,7 +12,7 @@ fun  Container.projectile(width: Double, height: Double, posX: Number, posY: Num
 
 class Projectile(width: Double, height: Double, posX: Number, posY: Number, appleImageBitmap: Bitmap): Container() {
 
-    val projetilObject = roundRect(width, height,0.1, .1, Colors.TRANSPARENT_WHITE)
+    val projetilObject = roundRect(width, height,width/5, width/5, Colors.TRANSPARENT_WHITE)
     val type = BodyType.DYNAMIC
 
     init {
@@ -25,6 +25,6 @@ class Projectile(width: Double, height: Double, posX: Number, posY: Number, appl
 
     fun launch(vec2: Vec2) {
         this.projetilObject.body!!.linearVelocity = vec2
-        this.projetilObject.body!!.angularVelocity = 5.0F
+        this.projetilObject.body!!.angularVelocity = 4.0F
     }
 }
