@@ -1,9 +1,9 @@
-package br.edu.ufabc.fisicaludica.domain.dataproviders
+package br.edu.ufabc.fisicaludica.model.dataproviders
 
 /**
  * Dto class for parsing the game map.
  */
-data class MapDto(
+data class GameLevelDTO(
     val id: Long,
     val background: String,
     val title: String,

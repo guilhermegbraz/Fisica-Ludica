@@ -17,9 +17,9 @@
 
     <fragment
         android:id="@+id/destination_map_list"
-        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.MapListFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.GameLevelListFragment"
         android:label="fragment_map_list"
-        tools:layout="@layout/fragment_map_list">
+        tools:layout="@layout/fragment_game_level_list">
         <action
             android:id="@+id/goToGameFragment"
             app:destination="@id/gameInputWindowFragment"

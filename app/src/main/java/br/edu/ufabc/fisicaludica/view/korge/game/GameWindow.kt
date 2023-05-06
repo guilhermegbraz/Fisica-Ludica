@@ -1,27 +1,25 @@
 package br.edu.ufabc.fisicaludica.view.korge.game
 
 
-import br.edu.ufabc.fisicaludica.domain.Map
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import com.soywiz.korge.box2d.nearestBox2dWorld
 import com.soywiz.korge.box2d.registerBodyWithFixture
 import com.soywiz.korge.box2d.worldView
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.addTo
-import com.soywiz.korge.view.text
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korma.geom.Angle
-import com.soywiz.korma.geom.Matrix
 import com.soywiz.korma.geom.cos
 import com.soywiz.korma.geom.sin
 import org.jbox2d.common.Vec2
 
-fun Container.gameWindow( gameWindowWidth:Double,  gameWindowHeight: Double,gameMap: Map,
-              projectileBitmap: Bitmap, launcherBitmap: Bitmap, backgroundBitmap: Bitmap, targetImageBitmap: Bitmap)
+fun Container.gameWindow(gameWindowWidth:Double, gameWindowHeight: Double, gameMap: GameLevel,
+                         projectileBitmap: Bitmap, launcherBitmap: Bitmap, backgroundBitmap: Bitmap, targetImageBitmap: Bitmap)
 = GameWindow( gameWindowWidth, gameWindowHeight, gameMap, projectileBitmap, launcherBitmap, backgroundBitmap, targetImageBitmap)
     .addTo(this)
 
 
-class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeight: Double, val gameMap: Map, projectileBitmap: Bitmap, launcherBitmap: Bitmap,
+class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeight: Double, val gameMap: GameLevel, projectileBitmap: Bitmap, launcherBitmap: Bitmap,
                  backgroundBitmap: Bitmap, targetImageBitmap: Bitmap ): Container() {
 
     private var background: BackgroundView
@@ -32,29 +30,29 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
     private val worldScale: Double
 
     init {
-        this.gravity = Vec2(gameMap.gravityX.toFloat(), gameMap.gravityY.toFloat())
+        this.gravity = Vec2(gameMap.worldAtributtes.gravityX.toFloat(), gameMap.worldAtributtes.gravityY.toFloat())
         this.worldScale = gameWindowWidth / gameMap.widthMeters
         background = backgroundView(gameMap, backgroundBitmap, gameWindowWidth, gameWindowHeight)
 
         projectile = projectile(
             coordMetersToPixelX(gameMap.projectileWidth),
             coordMetersToPixelX(gameMap.projectileWidth),
-            coordMetersToPixelX(gameMap.posXLauncher),
-            coordMetersToPixelY(gameMap.posYLauncher) - coordMetersToPixelX(gameMap.projectileWidth),
+            coordMetersToPixelX(gameMap.elementsPosition.posXLauncher),
+            coordMetersToPixelY(gameMap.elementsPosition.posYLauncher) - coordMetersToPixelX(gameMap.projectileWidth),
             projectileBitmap)
 
         projectileLauncher = projectileLauncher(coordMetersToPixelX(gameMap.projectileLauncherWidht),
             coordMetersToPixelX(gameMap.projectileLauncherWidht) ,
-            this.coordMetersToPixelX(gameMap.posXLauncher - gameMap.projectileLauncherWidht/4),
-            coordMetersToPixelY(gameMap.posYLauncher) - coordMetersToPixelX(gameMap.projectileLauncherWidht),
+            this.coordMetersToPixelX(gameMap.elementsPosition.posXLauncher - gameMap.projectileLauncherWidht/4),
+            coordMetersToPixelY(gameMap.elementsPosition.posYLauncher) - coordMetersToPixelX(gameMap.projectileLauncherWidht),
             launcherBitmap)
 
         target = targetView(
             coordMetersToPixelX(gameMap.targetHeight),
             coordMetersToPixelX(gameMap.targetHeight/5.5),
-            coordMetersToPixelX(gameMap.posXTarget - gameMap.targetHeight/2),
-            coordMetersToPixelY(gameMap.posYTarget + gameMap.targetHeight/5.5 + gameMap.projectileWidth/3),
-            gameMap.targetRotation, targetImageBitmap)
+            coordMetersToPixelX(gameMap.elementsPosition.posXTarget - gameMap.targetHeight/2),
+            coordMetersToPixelY(gameMap.elementsPosition.posYTarget + gameMap.targetHeight/5.5 + gameMap.projectileWidth/3),
+            gameMap.elementsPosition.targetRotation, targetImageBitmap)
 
         createWorldAndRegisterBodies()
     }

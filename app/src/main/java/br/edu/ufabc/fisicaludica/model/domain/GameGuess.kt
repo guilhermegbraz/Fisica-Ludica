@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.domain
+package br.edu.ufabc.fisicaludica.model.domain
 
 class GameGuess(val initialVelocity: Double, val initialAngle: Double) {
 }

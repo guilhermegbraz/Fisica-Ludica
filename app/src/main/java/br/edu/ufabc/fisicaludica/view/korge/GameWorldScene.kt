@@ -1,7 +1,7 @@
 package br.edu.ufabc.fisicaludica.view.korge
 
-import br.edu.ufabc.fisicaludica.domain.GameGuess
-import br.edu.ufabc.fisicaludica.domain.Map
+import br.edu.ufabc.fisicaludica.model.domain.GameGuess
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.view.korge.game.*
 import com.soywiz.klock.TimeSpan
 import com.soywiz.korge.scene.Scene
@@ -13,7 +13,7 @@ import com.soywiz.korio.file.std.resourcesVfs
 
 
 
-class GameWorldScene(val gameMap : Map, private val gameGuess: GameGuess) : Scene() {
+class GameWorldScene(val gameMap : GameLevel, private val gameGuess: GameGuess) : Scene() {
 
 
     override suspend fun SContainer.sceneInit() {

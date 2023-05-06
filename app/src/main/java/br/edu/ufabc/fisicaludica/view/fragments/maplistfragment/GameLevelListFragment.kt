@@ -10,47 +10,49 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.edu.ufabc.fisicaludica.databinding.FragmentMapListBinding
+import br.edu.ufabc.fisicaludica.databinding.FragmentGameLevelListBinding
 import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
-import br.edu.ufabc.fisicaludica.domain.Map
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 /**
  * Fragment for list the game maps.
  */
-class MapListFragment : Fragment() {
+class GameLevelListFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var binding:FragmentMapListBinding
+    private lateinit var binding:FragmentGameLevelListBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding =  FragmentMapListBinding.inflate(inflater, container, false)
+        binding =  FragmentGameLevelListBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
     /**
-     * RecyclerView dapter.
+     * RecyclerView adapter.
      */
-    inner class MapAdapter(private val maps:List<Map>): RecyclerView.Adapter<MapHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapHolder =
-            MapHolder(
+    inner class GameLevelAdapter(private val gameLevels:List<GameLevel>): RecyclerView.Adapter<GameLevelHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameLevelHolder =
+            GameLevelHolder(
                 MapListItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false)
             )
 
-        override fun getItemCount(): Int = maps.size
+        override fun getItemCount(): Int = gameLevels.size
 
-        override fun onBindViewHolder(holder: MapHolder, position: Int) {
-            val map = maps[position]
+        override fun onBindViewHolder(holder: GameLevelHolder, position: Int) {
+            val map = gameLevels[position]
             holder.title.text = map.title
-            holder.imageView.setImageDrawable(Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroud))
+            holder.imageView.setImageDrawable(
+                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroud)
+            )
 
             holder.card.setOnClickListener{
                 viewModel.clickedMapId.value = map.id
-                MapListFragmentDirections.goToGameFragment().let { action ->
+                GameLevelListFragmentDirections.goToGameFragment().let { action ->
                     findNavController().navigate(action)
                 }
             }
@@ -60,9 +62,17 @@ class MapListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerviewMapList.layoutManager = GridLayoutManager(context, 3)
-        binding.recyclerviewMapList.apply {
-            adapter = MapAdapter(viewModel.getAllMaps())
+        viewModel.isDataReady.observe(viewLifecycleOwner) {
+            if(it) {
+                binding.progressHorizontal.visibility = View.GONE
+                binding.recyclerviewMapList.apply {
+                    adapter = GameLevelAdapter(viewModel.getAllMaps())
+                }
+            } else {
+                binding.progressHorizontal.visibility = View.VISIBLE
+            }
         }
+
 
     }
 }

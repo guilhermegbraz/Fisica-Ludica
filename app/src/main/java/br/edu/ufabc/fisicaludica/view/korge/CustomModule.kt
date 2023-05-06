@@ -1,10 +1,8 @@
 package br.edu.ufabc.fisicaludica.view.korge
 
 
-import android.view.View
-import br.edu.ufabc.fisicaludica.domain.GameGuess
-import br.edu.ufabc.fisicaludica.domain.Map
-import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import br.edu.ufabc.fisicaludica.model.domain.GameGuess
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korinject.AsyncInjector
@@ -15,7 +13,7 @@ import kotlin.reflect.KClass
 class CustomModule (
     private val width: Int = DEFAULT_WIDTH,
     private val height: Int = DEFAULT_HEIGHT,
-    private val gameMap: Map,
+    private val gameLevel: GameLevel,
     private val gameGuess: GameGuess,
     val callback: () -> Unit,
     )
@@ -35,6 +33,6 @@ class CustomModule (
     override val mainScene: KClass<out Scene> = GameWorldScene::class
 
     override suspend fun AsyncInjector.configure() {
-        mapPrototype { GameWorldScene(gameMap, gameGuess) }
+        mapPrototype { GameWorldScene(gameLevel, gameGuess) }
     }
 }

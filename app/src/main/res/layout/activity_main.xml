@@ -27,7 +27,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <!--    NavHost -->
     <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_fragment_container"

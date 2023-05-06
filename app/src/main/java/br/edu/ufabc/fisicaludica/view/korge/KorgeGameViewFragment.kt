@@ -1,8 +1,6 @@
 package br.edu.ufabc.fisicaludica.view.korge
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
-import br.edu.ufabc.fisicaludica.domain.GameGuess
+import br.edu.ufabc.fisicaludica.model.domain.GameGuess
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 import com.soywiz.korge.android.KorgeAndroidView
-import com.soywiz.korge.view.ScalingOption
 
 class KorgeGameViewFragment : Fragment() {
     lateinit var binding: FragmentKorgeGameViewBinding

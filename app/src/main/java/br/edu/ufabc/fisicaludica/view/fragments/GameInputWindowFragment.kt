@@ -11,15 +11,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameInputWindowBinding
-import br.edu.ufabc.fisicaludica.domain.Map
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
-import kotlin.math.round
 
 /**
  * Fragment for the game input data stage.
@@ -49,9 +47,9 @@ class GameInputWindowFragment : Fragment() {
 
     private fun setBackground() {
         viewModel.clickedMapId.value?.let {
-            val gameMap: Map = viewModel.getMapById(it)
+            val gameLevel: GameLevel = viewModel.getMapById(it)
             binding.fragmentGameMapLayout.background =
-                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameMap),gameMap.backgroud)
+                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameLevel),gameLevel.backgroud)
         }
     }
     private fun setElementsState() {
@@ -67,28 +65,28 @@ class GameInputWindowFragment : Fragment() {
 
     private fun positionateElements(fragmentWidth: Int, fragmentHeight: Int) {
         viewModel.clickedMapId.value?.let {
-            val gameMap: Map = viewModel.getMapById(it)
+            val gameLevel: GameLevel = viewModel.getMapById(it)
 
             binding.gameFragmentTextviewCoordinates.text =
-                String.format(getString(R.string.game_fragment_coordinate), gameMap.posXTarget - gameMap.posXLauncher, gameMap.posYTarget)
+                String.format(getString(R.string.game_fragment_coordinate), gameLevel.elementsPosition.posXTarget - gameLevel.elementsPosition.posXLauncher, gameLevel.elementsPosition.posYTarget)
 
-            binding.gameFragmentSlideBarVelocity.value = gameMap.initialVelocity.toFloat()
-            binding.gameFragmentSlideBarTheta.value = gameMap.initialAngleDegrees.toFloat()
-            binding.gameFragmentSlideBarVelocity.isEnabled = gameMap.isVelocityVariable
-            binding.gameFragmentSlideBarTheta.isEnabled = gameMap.isAngleVariable
+            binding.gameFragmentSlideBarVelocity.value = gameLevel.worldAtributtes.initialVelocity.toFloat()
+            binding.gameFragmentSlideBarTheta.value = gameLevel.worldAtributtes.initialAngleDegrees.toFloat()
+            binding.gameFragmentSlideBarVelocity.isEnabled = gameLevel.worldAtributtes.isVelocityVariable
+            binding.gameFragmentSlideBarTheta.isEnabled = gameLevel.worldAtributtes.isAngleVariable
 
-            binding.gameFragmentSlideBarTheta.valueFrom = (gameMap.initialAngleDegrees % 10).toFloat()
-            binding.gameFragmentSlideBarTheta.valueTo = (gameMap.initialAngleDegrees + 5*10).toFloat()
-            binding.gameFragmentSlideBarVelocity.valueFrom = (gameMap.initialVelocity % 10).toFloat()
-            binding.gameFragmentSlideBarVelocity.valueTo = (gameMap.initialVelocity % 10 + 4*10).toFloat()
+            binding.gameFragmentSlideBarTheta.valueFrom = (gameLevel.worldAtributtes.initialAngleDegrees % 10).toFloat()
+            binding.gameFragmentSlideBarTheta.valueTo = (gameLevel.worldAtributtes.initialAngleDegrees + 5*10).toFloat()
+            binding.gameFragmentSlideBarVelocity.valueFrom = (gameLevel.worldAtributtes.initialVelocity % 10).toFloat()
+            binding.gameFragmentSlideBarVelocity.valueTo = (gameLevel.worldAtributtes.initialVelocity % 10 + 4*10).toFloat()
 
-            val screenScale = fragmentWidth / gameMap.widthMeters
-            val launcherWidthPixel = (screenScale).times(gameMap.projectileLauncherWidht)
+            val screenScale = fragmentWidth / gameLevel.widthMeters
+            val launcherWidthPixel = (screenScale).times(gameLevel.projectileLauncherWidht)
             val layoutParamsLauncher = binding.gameFragmentCannonball.layoutParams as ConstraintLayout.LayoutParams
 
-            layoutParamsLauncher.horizontalBias =  (gameMap.posXLauncher - gameMap.projectileLauncherWidht/2).toFloat().div(gameMap.widthMeters).toFloat()
+            layoutParamsLauncher.horizontalBias =  (gameLevel.elementsPosition.posXLauncher - gameLevel.projectileLauncherWidht/2).toFloat().div(gameLevel.widthMeters).toFloat()
             layoutParamsLauncher.verticalBias = (
-                    (gameMap.groundPosition.times(fragmentHeight)).minus(gameMap.posYLauncher.times(screenScale).plus(gameMap.projectileLauncherWidht/2))
+                    (gameLevel.groundPosition.times(fragmentHeight)).minus(gameLevel.elementsPosition.posYLauncher.times(screenScale).plus(gameLevel.projectileLauncherWidht/2))
                     ).div(fragmentHeight).toFloat()
 
 
@@ -97,7 +95,7 @@ class GameInputWindowFragment : Fragment() {
 
 
             val matrix = Matrix()
-            matrix.postRotate( -gameMap.targetRotation.toFloat())
+            matrix.postRotate( -gameLevel.elementsPosition.targetRotation.toFloat())
             val bitmap = (binding.gameFragmentTarget.drawable as BitmapDrawable).bitmap
             val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
             binding.gameFragmentTarget.setImageBitmap(rotatedBitmap)
@@ -105,13 +103,13 @@ class GameInputWindowFragment : Fragment() {
 
             val layoutParamsTarget = binding.gameFragmentTarget.layoutParams as ConstraintLayout.LayoutParams
 
-            layoutParamsTarget.width = screenScale.times(gameMap.targetHeight).toInt()
-            layoutParamsTarget.height = screenScale.times(gameMap.targetHeight).toInt()
+            layoutParamsTarget.width = screenScale.times(gameLevel.targetHeight).toInt()
+            layoutParamsTarget.height = screenScale.times(gameLevel.targetHeight).toInt()
 
-            layoutParamsTarget.horizontalBias = (gameMap.posXTarget.minus(gameMap.targetHeight/2)).toFloat().div(gameMap.widthMeters.toFloat())
+            layoutParamsTarget.horizontalBias = (gameLevel.elementsPosition.posXTarget.minus(gameLevel.targetHeight/2)).toFloat().div(gameLevel.widthMeters.toFloat())
             Log.d("bias target", "${layoutParamsTarget.horizontalBias}")
             layoutParamsTarget.verticalBias = (
-                    (gameMap.groundPosition.times(fragmentHeight)).minus(gameMap.posYTarget.times(screenScale).plus(gameMap.targetHeight/2))
+                    (gameLevel.groundPosition.times(fragmentHeight)).minus(gameLevel.elementsPosition.posYTarget.times(screenScale).plus(gameLevel.targetHeight/2))
                     ).div(fragmentHeight).toFloat()
 
         }

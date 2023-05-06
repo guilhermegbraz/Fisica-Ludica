@@ -100,7 +100,7 @@
 	{
 		"id": 6,
 		"background": "moon_surfice1.png",
-		"title": "Fase 4: Lua\nAlcance maximo",
+		"title": "Fase 6: Lua\nAlcance maximo",
 		"widthInMeters": 65,
 		"groundPosition" : 0.71,
 		"launcherPositionX" : 2,
