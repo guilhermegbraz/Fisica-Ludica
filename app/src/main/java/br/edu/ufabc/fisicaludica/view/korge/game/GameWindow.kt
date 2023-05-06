@@ -7,8 +7,10 @@ import com.soywiz.korge.box2d.registerBodyWithFixture
 import com.soywiz.korge.box2d.worldView
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.addTo
+import com.soywiz.korge.view.text
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korma.geom.Angle
+import com.soywiz.korma.geom.Matrix
 import com.soywiz.korma.geom.cos
 import com.soywiz.korma.geom.sin
 import org.jbox2d.common.Vec2
@@ -22,14 +24,15 @@ fun Container.gameWindow( gameWindowWidth:Double,  gameWindowHeight: Double,game
 class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeight: Double, val gameMap: Map, projectileBitmap: Bitmap, launcherBitmap: Bitmap,
                  backgroundBitmap: Bitmap, targetImageBitmap: Bitmap ): Container() {
 
-    var background: BackgroundView
-    var projectile: Projectile
-    var projectileLauncher: ProjectileLauncherView
-    var target: TargetView
-    lateinit var gravity: Vec2
-    val worldScale: Double
+    private var background: BackgroundView
+    private var projectile: Projectile
+    private var projectileLauncher: ProjectileLauncherView
+    private var target: TargetView
+    private var gravity: Vec2
+    private val worldScale: Double
 
     init {
+        this.gravity = Vec2(gameMap.gravityX.toFloat(), gameMap.gravityY.toFloat())
         this.worldScale = gameWindowWidth / gameMap.widthMeters
         background = backgroundView(gameMap, backgroundBitmap, gameWindowWidth, gameWindowHeight)
 
@@ -37,7 +40,7 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
             coordMetersToPixelX(gameMap.projectileWidth),
             coordMetersToPixelX(gameMap.projectileWidth),
             coordMetersToPixelX(gameMap.posXLauncher),
-            coordMetersToPixelY(gameMap.posYLauncher) - coordMetersToPixelX(gameMap.projectileWidth) - 1,
+            coordMetersToPixelY(gameMap.posYLauncher) - coordMetersToPixelX(gameMap.projectileWidth),
             projectileBitmap)
 
         projectileLauncher = projectileLauncher(coordMetersToPixelX(gameMap.projectileLauncherWidht),
@@ -46,9 +49,12 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
             coordMetersToPixelY(gameMap.posYLauncher) - coordMetersToPixelX(gameMap.projectileLauncherWidht),
             launcherBitmap)
 
-        target = targetView(coordMetersToPixelX(gameMap.targetHeight), coordMetersToPixelX(gameMap.targetHeight/5.5), coordMetersToPixelX(gameMap.posXTarget - gameMap.targetHeight/2),
-            coordMetersToPixelY(gameMap.posYTarget) - coordMetersToPixelX(gameMap.targetHeight/5.5),
-            90, targetImageBitmap)
+        target = targetView(
+            coordMetersToPixelX(gameMap.targetHeight),
+            coordMetersToPixelX(gameMap.targetHeight/5.5),
+            coordMetersToPixelX(gameMap.posXTarget - gameMap.targetHeight/2),
+            coordMetersToPixelY(gameMap.posYTarget + gameMap.targetHeight/5.5 + gameMap.projectileWidth/3),
+            gameMap.targetRotation, targetImageBitmap)
 
         createWorldAndRegisterBodies()
     }
@@ -56,7 +62,7 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
     private fun createWorldAndRegisterBodies() {
         worldView {
             nearestBox2dWorld.world.customScale = worldScale
-            nearestBox2dWorld.world.gravity = Vec2(gameMap.gravityX.toFloat(), gameMap.gravityY.toFloat())
+            nearestBox2dWorld.world.gravity = gravity
             background.ground.registerBodyWithFixture(type= background.groundType, friction = 5)
             projectile.projetilObject.registerBodyWithFixture(type = projectile.type, friction = .02, density = 0.8)
             target.targetBody.registerBodyWithFixture(type = target.type, friction = 10)
