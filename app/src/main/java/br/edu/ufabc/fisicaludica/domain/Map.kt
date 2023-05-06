@@ -8,10 +8,10 @@ class Map (id:Long, backgroud: String, title: String, groundPosition: Double, la
            laucherPositionY: Double, targetPositionX: Double, targetPositionY: Double, linearVelocity: Double,
            isVelocityVariable: Boolean, rotationAngle: Double, isAngleVariable: Boolean,
            widthMeters: Double,
-           isTargetHorizontal: Boolean,
+           targetRotation: Int,
            gravityX: Double,
            gravityY: Double) {
-     var id: Long
+    var id: Long
         private set
       var backgroud: String
         private set
@@ -32,11 +32,11 @@ class Map (id:Long, backgroud: String, title: String, groundPosition: Double, la
     val initialAngleDegrees: Double
     val isAngleVariable: Boolean
 
-    val targetHeight = 4.5
-    val projectileLauncherWidht = 4.5
+    val targetHeight = 3.0
+    val projectileLauncherWidht = 4.0
     val projectileWidth = 1.2
 
-    val isTargetHorizontal: Boolean
+    val targetRotation: Int
     val gravityX: Double
     val gravityY: Double
 
@@ -54,7 +54,7 @@ class Map (id:Long, backgroud: String, title: String, groundPosition: Double, la
         initialVelocity = linearVelocity
         this.isVelocityVariable = isVelocityVariable
         this.widthMeters = widthMeters
-        this.isTargetHorizontal = true
+        this.targetRotation = targetRotation
         this.gravityX = gravityX
         this.gravityY = gravityY
     }
