@@ -1,5 +1,6 @@
 package br.edu.ufabc.fisicaludica.view.korge.game
 
+import android.graphics.Matrix
 import com.soywiz.korge.view.*
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.color.Colors
@@ -17,8 +18,8 @@ class TargetView(width: Double, height: Double, posX: Number, posY: Number,
 
     init {
         targetBody.position(posX.toDouble(), posY.toDouble())
-        //.rotation(Angle.fromDegrees(rotation))
         val targetImage = image(targetImageBitmap)
+        targetBody.rotation =(Angle.Companion.fromDegrees(-rotation))
         targetImage.scale(
             targetBody.width / targetImage.width,
             targetBody.height / targetImage.height
