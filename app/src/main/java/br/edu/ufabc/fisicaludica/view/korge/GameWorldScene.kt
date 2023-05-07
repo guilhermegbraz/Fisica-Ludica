@@ -19,7 +19,7 @@ class GameWorldScene(val gameMap : GameLevel, private val gameGuess: GameGuess) 
     override suspend fun SContainer.sceneInit() {
         val projectileBitmap = resourcesVfs["maca.png"].readBitmap()
         val launcherBitmap = resourcesVfs["canhao_80px.png"].readBitmap()
-        val backgroundBitmap = resourcesVfs[gameMap.backgroud].readBitmap()
+        val backgroundBitmap = resourcesVfs[gameMap.backgroudUrl].readBitmap()
         val targetBitmap = resourcesVfs["alvo_circular_deitado.png"].readBitmap()
 
 
