@@ -4,14 +4,14 @@ package br.edu.ufabc.fisicaludica.model.domain
 /**
  * domain class for game map.
  */
-class GameLevel (id:Long, backgroud: String, title: String, groundPosition: Double,
+class GameLevel (id:Long, backgroudUrl: String, title: String, groundPosition: Double,
                  widthMeters: Double,
                  elementsPosition: GameLevelElementsPosition,
                  worldAtributtes: GameLevelAtributtes
                  ) {
     var id: Long
         private set
-      var backgroud: String
+      var backgroudUrl: String
         private set
     var title: String
         private set
@@ -31,7 +31,7 @@ class GameLevel (id:Long, backgroud: String, title: String, groundPosition: Doub
 
     init {
         this.id = id
-        this.backgroud = backgroud
+        this.backgroudUrl = backgroudUrl
         this.title = title
         this.groundPosition = groundPosition
         this.elementsPosition = elementsPosition

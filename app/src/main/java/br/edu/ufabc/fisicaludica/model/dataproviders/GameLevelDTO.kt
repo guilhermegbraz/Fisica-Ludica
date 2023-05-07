@@ -19,4 +19,12 @@ data class GameLevelDTO(
     val isAngleVariable: Boolean,
     val targetRotation: Int,
     val gravityX: Double,
-    val gravityY: Double)
+    val gravityY: Double) {
+
+    fun toFirestore(): GameLevelFirestoreRepository.GameLevelFirestore {
+        return GameLevelFirestoreRepository.GameLevelFirestore(id, background, gravityX, gravityY, groundPosition
+        , initialAngleDegrees, initialVelocity, isAngleVariable, isVelocityVariable, launcherPositionX,
+            launcherPositionY, targetPositionX, targetPositionY, targetRotation, title, widthInMeters
+        )
+    }
+}
