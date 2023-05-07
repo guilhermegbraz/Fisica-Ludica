@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameGuess
+import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 import com.soywiz.korge.android.KorgeAndroidView
 
@@ -40,7 +41,23 @@ class KorgeGameViewFragment : Fragment() {
         super.onResume()
         hideAppBar()
         binding.toolContainer.addView(korgeAndroidView)
-        loadToolModule()
+        viewModel.clickedMapId.value?.let {
+            viewModel.getMapById(it).observe(viewLifecycleOwner) { status ->
+                when (status) {
+                    is MainViewModel.Status.Loading -> {
+
+                    }
+
+                    is MainViewModel.Status.Success -> {
+                        val gameLevel = (status.result as MainViewModel.Result.SingleGameLevel).value
+                        loadToolModule(gameLevel)
+                    }
+
+                    is MainViewModel.Status.Failure -> TODO()
+                }
+            }
+        }
+
     }
 
     private fun bindEvents() {
@@ -52,15 +69,13 @@ class KorgeGameViewFragment : Fragment() {
         }
     }
 
-    private fun loadToolModule() {
+    private fun loadToolModule(gameMap: GameLevel) {
         requireView().post {
             val fragmentHeight = requireView().height //height is ready
             val fragmentWidth = requireView().width
 
             viewModel.clickedMapId.value?.let {
                 val guess = GameGuess(args.initialVelocity.toDouble(), args.initialAngle.toDouble())
-                val gameMap =   this.viewModel.getMapById(it)
-
                 val myModule = CustomModule(
                     width = fragmentWidth, height = fragmentHeight, gameMap, guess,
                     callback = {

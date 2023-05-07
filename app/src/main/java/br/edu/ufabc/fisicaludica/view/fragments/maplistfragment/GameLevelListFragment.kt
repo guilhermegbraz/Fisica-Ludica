@@ -2,6 +2,7 @@ package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,11 +48,12 @@ class GameLevelListFragment : Fragment() {
             val map = gameLevels[position]
             holder.title.text = map.title
             holder.imageView.setImageDrawable(
-                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroud)
+                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroudUrl)
             )
 
             holder.card.setOnClickListener{
                 viewModel.clickedMapId.value = map.id
+                Log.d("list fragment", "o usuario clicou no level de id: ${viewModel.clickedMapId.value}")
                 GameLevelListFragmentDirections.goToGameFragment().let { action ->
                     findNavController().navigate(action)
                 }
@@ -62,17 +64,26 @@ class GameLevelListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerviewMapList.layoutManager = GridLayoutManager(context, 3)
-        viewModel.isDataReady.observe(viewLifecycleOwner) {
-            if(it) {
-                binding.progressHorizontal.visibility = View.GONE
-                binding.recyclerviewMapList.apply {
-                    adapter = GameLevelAdapter(viewModel.getAllMaps())
+        viewModel.getAllMaps().observe(viewLifecycleOwner) { status->
+            when(status) {
+                is MainViewModel.Status.Loading -> {
+                    binding.progressHorizontal.visibility = View.VISIBLE
                 }
-            } else {
-                binding.progressHorizontal.visibility = View.VISIBLE
+                is MainViewModel.Status.Success -> {
+
+                    val gameLevelList = (status.result as MainViewModel.Result.GameLevelList).value
+                    binding.progressHorizontal.visibility = View.INVISIBLE
+                    binding.recyclerviewMapList.apply {
+                        adapter = GameLevelAdapter(gameLevelList.sortedBy { it.id })
+                    }
+                }
+
+                is MainViewModel.Status.Failure -> {
+                    Log.d("Status", "Obtivemos Status Failure ")
+                    //status.e.message?.let { Log.d("erro db", it) }
+                }
             }
         }
-
 
     }
 }
