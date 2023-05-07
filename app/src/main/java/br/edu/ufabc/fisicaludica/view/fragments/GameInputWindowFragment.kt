@@ -18,6 +18,9 @@ import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameInputWindowBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.soywiz.korma.math.roundDecimalPlaces
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 /**
  * Fragment for the game input data stage.
@@ -36,83 +39,118 @@ class GameInputWindowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setBackground()
         bindEvents()
-    }
+        binding.progressHorizontal.visibility = View.VISIBLE
+        binding.gameFragmentGameWindow.visibility = View.INVISIBLE
 
-    override fun onResume() {
-        super.onResume()
-        setElementsState()
-    }
-
-    private fun setBackground() {
         viewModel.clickedMapId.value?.let {
-            val gameLevel: GameLevel = viewModel.getMapById(it)
-            binding.fragmentGameMapLayout.background =
-                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameLevel),gameLevel.backgroud)
+            Log.d("input window", "vou montar a tela com o id: ${it}")
+            viewModel.getMapById(it).observe(viewLifecycleOwner) { status ->
+                when (status) {
+                    is MainViewModel.Status.Loading -> {
+
+                    }
+                    is MainViewModel.Status.Success -> {
+                        val gameLevel = (status.result as MainViewModel.Result.SingleGameLevel).value
+                        setBackground(gameLevel)
+                        setElementsState(gameLevel)
+                        elementsPosition(
+                            viewModel.fragmentResolutionWidth!!,
+                            viewModel.fragmentResolutionHeight!!,
+                            gameLevel)
+                        setUpTargetPosition(viewModel.fragmentResolutionWidth!!,
+                            viewModel.fragmentResolutionHeight!!,
+                            gameLevel)
+                        binding.progressHorizontal.visibility = View.GONE
+                        binding.gameFragmentGameWindow.visibility = View.VISIBLE
+                    }
+                    is MainViewModel.Status.Failure -> {
+
+                    }
+                }
+            }
         }
+
     }
-    private fun setElementsState() {
 
-        requireView().post {
-            val fragmentHeight = requireView().height //height is ready
-            val fragmentWidth = requireView().width
-            Log.d("resolução", "temos ${fragmentWidth} ${ fragmentHeight}")
-            positionateElements(fragmentWidth, fragmentHeight)
-        }
+
+
+    private fun setBackground(gameLevel: GameLevel) {
+        Log.d("input window", "A url do background eh ${gameLevel.backgroudUrl}")
+        binding.fragmentGameMapLayout.background =
+            Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameLevel),gameLevel.backgroudUrl)
+    }
+    private fun setElementsState(gameLevel: GameLevel) {
+        binding.gameFragmentTextviewCoordinates.text =
+            String.format(getString(R.string.game_fragment_coordinate), gameLevel.elementsPosition.posXTarget - gameLevel.elementsPosition.posXLauncher, gameLevel.elementsPosition.posYTarget)
+
+        binding.gameFragmentSlideBarVelocity.value = gameLevel.worldAtributtes.initialVelocity.toFloat()
+        binding.gameFragmentSlideBarTheta.value = gameLevel.worldAtributtes.initialAngleDegrees.toFloat()
+        binding.gameFragmentSlideBarVelocity.isEnabled = gameLevel.worldAtributtes.isVelocityVariable
+        binding.gameFragmentSlideBarTheta.isEnabled = gameLevel.worldAtributtes.isAngleVariable
+
+        binding.gameFragmentSlideBarTheta.valueFrom = (gameLevel.worldAtributtes.initialAngleDegrees % 10).toFloat()
+        binding.gameFragmentSlideBarTheta.valueTo = (gameLevel.worldAtributtes.initialAngleDegrees + 5*10).toFloat()
+        binding.gameFragmentSlideBarVelocity.valueFrom = (gameLevel.worldAtributtes.initialVelocity % 10).toFloat()
+        binding.gameFragmentSlideBarVelocity.valueTo = (gameLevel.worldAtributtes.initialVelocity % 10 + 4*10).toFloat()
+    }
+
+    private fun elementsPosition(fragmentWidth: Int, fragmentHeight: Int, gameLevel: GameLevel) {
+
+        val screenScale = fragmentWidth / gameLevel.widthMeters
+        val launcherWidthPixel = (screenScale).times(gameLevel.projectileLauncherWidht)
+
+        val layoutParamsLauncher = binding.gameFragmentCannonball.layoutParams as ConstraintLayout.LayoutParams
+
+        layoutParamsLauncher.horizontalBias =
+            (gameLevel.elementsPosition.posXLauncher - gameLevel.projectileLauncherWidht/8)
+            .toFloat()
+            .div(gameLevel.widthMeters)
+            .toFloat()
+
+        layoutParamsLauncher.verticalBias =
+            (
+                (gameLevel.groundPosition.times(fragmentHeight))
+                .minus(gameLevel.elementsPosition.posYLauncher.times(screenScale))
+                .minus(gameLevel.projectileWidth.times(screenScale)))
+                .div(fragmentHeight).toFloat()
+
+
+        layoutParamsLauncher.width = launcherWidthPixel.toInt()
+        layoutParamsLauncher.height = launcherWidthPixel.toInt()
+
+        binding.gameFragmentCannonball.layoutParams = layoutParamsLauncher
+
 
     }
 
-    private fun positionateElements(fragmentWidth: Int, fragmentHeight: Int) {
-        viewModel.clickedMapId.value?.let {
-            val gameLevel: GameLevel = viewModel.getMapById(it)
+    fun setUpTargetPosition(fragmentWidth: Int, fragmentHeight: Int, gameLevel: GameLevel) {
+        val screenScale = fragmentWidth / gameLevel.widthMeters
 
-            binding.gameFragmentTextviewCoordinates.text =
-                String.format(getString(R.string.game_fragment_coordinate), gameLevel.elementsPosition.posXTarget - gameLevel.elementsPosition.posXLauncher, gameLevel.elementsPosition.posYTarget)
-
-            binding.gameFragmentSlideBarVelocity.value = gameLevel.worldAtributtes.initialVelocity.toFloat()
-            binding.gameFragmentSlideBarTheta.value = gameLevel.worldAtributtes.initialAngleDegrees.toFloat()
-            binding.gameFragmentSlideBarVelocity.isEnabled = gameLevel.worldAtributtes.isVelocityVariable
-            binding.gameFragmentSlideBarTheta.isEnabled = gameLevel.worldAtributtes.isAngleVariable
-
-            binding.gameFragmentSlideBarTheta.valueFrom = (gameLevel.worldAtributtes.initialAngleDegrees % 10).toFloat()
-            binding.gameFragmentSlideBarTheta.valueTo = (gameLevel.worldAtributtes.initialAngleDegrees + 5*10).toFloat()
-            binding.gameFragmentSlideBarVelocity.valueFrom = (gameLevel.worldAtributtes.initialVelocity % 10).toFloat()
-            binding.gameFragmentSlideBarVelocity.valueTo = (gameLevel.worldAtributtes.initialVelocity % 10 + 4*10).toFloat()
-
-            val screenScale = fragmentWidth / gameLevel.widthMeters
-            val launcherWidthPixel = (screenScale).times(gameLevel.projectileLauncherWidht)
-            val layoutParamsLauncher = binding.gameFragmentCannonball.layoutParams as ConstraintLayout.LayoutParams
-
-            layoutParamsLauncher.horizontalBias =  (gameLevel.elementsPosition.posXLauncher - gameLevel.projectileLauncherWidht/2).toFloat().div(gameLevel.widthMeters).toFloat()
-            layoutParamsLauncher.verticalBias = (
-                    (gameLevel.groundPosition.times(fragmentHeight)).minus(gameLevel.elementsPosition.posYLauncher.times(screenScale).plus(gameLevel.projectileLauncherWidht/2))
-                    ).div(fragmentHeight).toFloat()
+        val matrix = Matrix()
+        matrix.postRotate( -gameLevel.elementsPosition.targetRotation.toFloat())
+        val bitmap = (binding.gameFragmentTarget.drawable as BitmapDrawable).bitmap
+        val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        binding.gameFragmentTarget.setImageBitmap(rotatedBitmap)
 
 
-            layoutParamsLauncher.width = launcherWidthPixel.toInt()
-            layoutParamsLauncher.height = launcherWidthPixel.toInt()
+        val layoutParamsTarget = binding.gameFragmentTarget.layoutParams as ConstraintLayout.LayoutParams
 
+        layoutParamsTarget.width = screenScale.times(gameLevel.targetHeight).toInt()
+        layoutParamsTarget.height = screenScale.times(gameLevel.targetHeight.div(2)).toInt()
 
-            val matrix = Matrix()
-            matrix.postRotate( -gameLevel.elementsPosition.targetRotation.toFloat())
-            val bitmap = (binding.gameFragmentTarget.drawable as BitmapDrawable).bitmap
-            val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-            binding.gameFragmentTarget.setImageBitmap(rotatedBitmap)
+        layoutParamsTarget.verticalBias = (
+                (gameLevel.groundPosition.times(fragmentHeight)).
+                minus(gameLevel.elementsPosition.posYTarget.times(screenScale)
+                    .plus(gameLevel.targetHeight/2))
+                ).div(fragmentHeight).toFloat()
 
+        layoutParamsTarget.horizontalBias = (gameLevel.elementsPosition.posXTarget.plus(gameLevel.targetHeight/2))
+            .toFloat()
+            .div(gameLevel.widthMeters)
+            .toFloat()
 
-            val layoutParamsTarget = binding.gameFragmentTarget.layoutParams as ConstraintLayout.LayoutParams
-
-            layoutParamsTarget.width = screenScale.times(gameLevel.targetHeight).toInt()
-            layoutParamsTarget.height = screenScale.times(gameLevel.targetHeight).toInt()
-
-            layoutParamsTarget.horizontalBias = (gameLevel.elementsPosition.posXTarget.minus(gameLevel.targetHeight/2)).toFloat().div(gameLevel.widthMeters.toFloat())
-            Log.d("bias target", "${layoutParamsTarget.horizontalBias}")
-            layoutParamsTarget.verticalBias = (
-                    (gameLevel.groundPosition.times(fragmentHeight)).minus(gameLevel.elementsPosition.posYTarget.times(screenScale).plus(gameLevel.targetHeight/2))
-                    ).div(fragmentHeight).toFloat()
-
-        }
+        binding.gameFragmentTarget.layoutParams = layoutParamsTarget
 
     }
 
