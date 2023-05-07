@@ -43,7 +43,7 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
 
         projectileLauncher = projectileLauncher(coordMetersToPixelX(gameMap.projectileLauncherWidht),
             coordMetersToPixelX(gameMap.projectileLauncherWidht) ,
-            this.coordMetersToPixelX(gameMap.elementsPosition.posXLauncher - gameMap.projectileLauncherWidht/4),
+            this.coordMetersToPixelX(gameMap.elementsPosition.posXLauncher - gameMap.projectileLauncherWidht/8),
             coordMetersToPixelY(gameMap.elementsPosition.posYLauncher) - coordMetersToPixelX(gameMap.projectileLauncherWidht),
             launcherBitmap)
 

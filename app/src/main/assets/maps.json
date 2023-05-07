@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"background": "background_green_yard_with_mountains.png",
-		"title": "Fase 1: Encontre a\npos x dado o tempo",
+		"title": "Fase 1: intercepte \n em x dado o tempo",
 		"widthInMeters": 48,
 		"groundPosition" : 0.76,
 		"launcherPositionX" : 2,
@@ -21,7 +21,7 @@
 	{
 		"id": 2,
 		"background": "urban_city3.png",
-		"title": "Fase 2: Encontre\npos y dado o tempo",
+		"title": "Fase 2: intercepte\nem y dado o tempo",
 		"widthInMeters": 74,
 		"groundPosition" : 0.78,
 		"launcherPositionX" : 2,
@@ -62,7 +62,7 @@
 		"id": 4,
 		"background": "background_green_yard_with_mountains2.png",
 		"title": "Fase 4:\nAltura maxima",
-		"widthInMeters": 30,
+		"widthInMeters": 55,
 		"groundPosition" : 0.8,
 		"launcherPositionX" : 2.0,
 		"launcherPositionY": 0.0,

@@ -27,7 +27,7 @@ class GameLevelJsonRepository (private val mapDtoToMapParser: MapDtoToMap): Game
     /**
      * get all the maps.
      */
-    override fun getAll(): List<GameLevel> = if (this::gameLevels.isInitialized) gameLevels else {
+    override suspend fun getAll(): List<GameLevel> = if (this::gameLevels.isInitialized) gameLevels else {
         Log.d(
             "error",
             "No data has been fetched yet. On GameLevelRepository"
@@ -38,7 +38,7 @@ class GameLevelJsonRepository (private val mapDtoToMapParser: MapDtoToMap): Game
     /**
      * get map by id.
      */
-    override fun getGameLevelById(id: Long): GameLevel {
+    override suspend fun getGameLevelById(id: Long): GameLevel {
         return gameLevels.find { it.id == id }
             ?: throw IllegalArgumentException("Didn't found the map you're looking for").also {
                 Log.d("error", "Didn't found gameLevel with id = $id")
