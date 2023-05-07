@@ -11,6 +11,7 @@
     <color name="red">#D30000</color>
     <color name="green_light">#4caf50</color>
     <color name="green_dark">#173518</color>
+    <color name="grey">#aaaaaa</color>
 
     <color name="red_light">#e60000</color>
     <color name="red_dark">#4d0000</color>

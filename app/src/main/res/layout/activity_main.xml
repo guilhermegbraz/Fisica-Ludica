@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+        android:id="@+id/main_activity_layout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,32 +12,20 @@
         android:screenOrientation="landscape"
 >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:theme="@style/Theme.FisicaLudica"
     >
-        <ImageButton
-                android:id="@+id/main_activity_pause_button"
-                android:layout_width="wrap_content"
+        <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_question_mark_24"
-                android:background="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/question_mark_for_open_the_pause_dialog"/>
-        <ImageButton
-                android:id="@+id/main_activity_back_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_back_40"
-                android:background="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/back_button_arrow_for_the_navigation_menu"/>
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/baseline_arrow_back_40" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </com.google.android.material.appbar.AppBarLayout>
 
     <!--    NavHost -->
     <androidx.fragment.app.FragmentContainerView

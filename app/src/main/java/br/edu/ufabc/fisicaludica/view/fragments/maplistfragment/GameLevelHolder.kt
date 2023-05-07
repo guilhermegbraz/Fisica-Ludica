@@ -6,7 +6,7 @@ import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 /**
  * RecyclerView holder.
  */
-class MapHolder(itemBinding: MapListItemBinding) :
+class GameLevelHolder(itemBinding: MapListItemBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
     /**
      * card view.

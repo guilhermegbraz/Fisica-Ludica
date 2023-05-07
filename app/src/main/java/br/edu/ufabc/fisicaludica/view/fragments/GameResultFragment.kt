@@ -1,15 +1,18 @@
 package br.edu.ufabc.fisicaludica.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameResultBinding
+import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 /**
  * Fragment for the game result.
@@ -18,6 +21,7 @@ class GameResultFragment : Fragment() {
 
     private lateinit var binding: FragmentGameResultBinding
     private val args: GameResultFragmentArgs by navArgs()
+    private val viewModel: MainViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentGameResultBinding.inflate(inflater, container, false)
         return binding.root
@@ -27,6 +31,12 @@ class GameResultFragment : Fragment() {
         super.onStart()
         createView()
         bindEvents()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideAppBar()
     }
 
     private fun createView() {
@@ -56,6 +66,16 @@ class GameResultFragment : Fragment() {
                 findNavController().navigate(it)
             }
         }
+    }
+
+    private fun hideAppBar() {
+        viewModel.isAppBarVisible.value = false
+        Log.d("app bar", "${viewModel.isAppBarVisible.value}")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.isAppBarVisible.value = true
     }
 
 }

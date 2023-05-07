@@ -2,41 +2,138 @@
 	{
 		"id": 1,
 		"background": "background_green_yard_with_mountains.png",
-		"title": "Fase 1"
+		"title": "Fase 1: intercepte \n em x dado o tempo",
+		"widthInMeters": 48,
+		"groundPosition" : 0.76,
+		"launcherPositionX" : 2,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 30.1683,
+		"targetPositionY" : 8.877,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngleDegrees" : 62,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"targetRotation": 0,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
 	},
 	{
 		"id": 2,
-		"background": "background_green_yard_with_mountains2.png",
-		"title": "Fase 2"
+		"background": "urban_city3.png",
+		"title": "Fase 2: intercepte\nem y dado o tempo",
+		"widthInMeters": 74,
+		"groundPosition" : 0.78,
+		"launcherPositionX" : 2,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 70.809,
+		"targetPositionY" : 4.08,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngleDegrees" : 35,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"targetRotation": 0,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
+
 	},
 	{
 		"id": 3,
 		"background": "background_green_yard_with_mountains3.png",
-		"title": "Fase 3"
+		"title": "Fase 3: \nAlcance maximo",
+		"widthInMeters": 65,
+		"groundPosition" : 0.75,
+		"launcherPositionX" : 2.0,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 47.0,
+		"targetPositionY" : 0.0,
+		"initialVelocity" : 21.0,
+		"isVelocityVariable": false,
+		"initialAngleDegrees" : 5.0,
+		"isAngleVariable": true,
+		"isTargetHorizontal": true,
+		"targetRotation": 0,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
+
 	},
 	{
 		"id": 4,
-		"background": "moon_surfice1.png",
-		"title": "Fase 4"
+		"background": "background_green_yard_with_mountains2.png",
+		"title": "Fase 4:\nAltura maxima",
+		"widthInMeters": 55,
+		"groundPosition" : 0.8,
+		"launcherPositionX" : 2.0,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 47.960,
+		"targetPositionY" : 19.00,
+		"initialVelocity" : 2.0,
+		"isVelocityVariable": true,
+		"initialAngleDegrees" : 40.0,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"targetRotation": 177,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
+
 	},
 	{
 		"id": 5,
 		"background": "moon_surfice2.png",
-		"title": "Fase 5"
+		"title": "Fase 5: Lua\nAltura maxima",
+		"widthInMeters": 90,
+		"groundPosition" : 0.707,
+		"launcherPositionX" : 2,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 76.529,
+		"targetPositionY" : 14.00,
+		"initialVelocity" : 20,
+		"isVelocityVariable": false,
+		"initialAngleDegrees" : 0,
+		"isAngleVariable": true,
+		"isTargetHorizontal": true,
+		"targetRotation": 178,
+		"gravityX" : 0.0,
+		"gravityY": 1.68
 	},
 	{
 		"id": 6,
-		"background": "urban_city2.png",
-		"title": "Fase 6: cidade"
+		"background": "moon_surfice1.png",
+		"title": "Fase 6: Lua\nAlcance maximo",
+		"widthInMeters": 65,
+		"groundPosition" : 0.71,
+		"launcherPositionX" : 2,
+		"launcherPositionY": 0.0,
+		"targetPositionX" : 61.524,
+		"targetPositionY" : 0,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngleDegrees" : 45,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"targetRotation": 0,
+		"gravityX" : 0.0,
+		"gravityY": 1.68
+
 	},
 	{
 		"id": 7,
-		"background": "urban_city3.png",
-		"title": "Fase 7"
-	},
-	{
-		"id": 8,
 		"background": "urbancity.png",
-		"title": "Fase final"
+		"title": "Fase final",
+		"widthInMeters": 55,
+		"groundPosition" : 0.86,
+		"launcherPositionX" : 2,
+		"launcherPositionY": 20,
+		"targetPositionX" : 49,
+		"targetPositionY" : 0.76,
+		"initialVelocity" : 2,
+		"isVelocityVariable": true,
+		"initialAngleDegrees" : 45,
+		"isAngleVariable": false,
+		"isTargetHorizontal": true,
+		"targetRotation": 90,
+		"gravityX" : 0.0,
+		"gravityY": 9.8
 	}
 ]

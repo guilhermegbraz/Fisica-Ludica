@@ -12,29 +12,31 @@
         <action
                 android:id="@+id/show_map_list"
                 app:destination="@id/destination_map_list"/>
+
     </fragment>
 
     <fragment
         android:id="@+id/destination_map_list"
-        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.MapListFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.maplistfragment.GameLevelListFragment"
         android:label="fragment_map_list"
-        tools:layout="@layout/fragment_map_list">
+        tools:layout="@layout/fragment_game_level_list">
         <action
             android:id="@+id/goToGameFragment"
-            app:destination="@id/mapGameFragment"
+            app:destination="@id/gameInputWindowFragment"
         />
     </fragment>
 
     <fragment
-        android:id="@+id/mapGameFragment"
-        android:name="br.edu.ufabc.fisicaludica.view.fragments.MapGameFragment"
+        android:id="@+id/gameInputWindowFragment"
+        android:name="br.edu.ufabc.fisicaludica.view.fragments.GameInputWindowFragment"
         android:label="fragment_map_game"
-        tools:layout="@layout/fragment_map_game">
+        tools:layout="@layout/fragment_game_input_window">
 
         <action android:id="@+id/backToMapList"
                 app:destination="@id/destination_map_list"/>
-        <action android:id="@+id/gameResult"
-                app:destination="@id/gameResultFragment"/>
+
+        <action android:id="@+id/showGameScene"
+                app:destination="@id/korgeGameViewFragment"/>
     </fragment>
 
     <fragment
@@ -55,9 +57,29 @@
 
         <action
                 android:id="@+id/resultGameTryAgain"
-                app:destination="@id/mapGameFragment"
-                app:popUpTo="@id/mapGameFragment"
+                app:destination="@id/gameInputWindowFragment"
+                app:popUpTo="@id/gameInputWindowFragment"
                 app:popUpToInclusive="true"
         />
+    </fragment>
+    <fragment
+            android:id="@+id/korgeGameViewFragment"
+            android:name="br.edu.ufabc.fisicaludica.view.korge.KorgeGameViewFragment"
+            android:label="fragment_korge_game_view"
+            tools:layout="@layout/fragment_korge_game_view">
+
+        <argument
+                android:name="initialVelocity"
+                app:argType="float"
+            />
+        <argument
+                android:name="initialAngle"
+                app:argType="float"
+        />
+        <action
+                android:id="@+id/showGameResult"
+                app:destination="@id/gameResultFragment"
+        />
+
     </fragment>
 </navigation>

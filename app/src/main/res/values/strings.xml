@@ -30,4 +30,5 @@
     </string>
     <string name="game_fragment_default_angle">angulo inicial = 45º</string>
     <string name="game_fragment_default_coordinate">coordenada (aX, bY)</string>
+    <string name="game_fragment_coordinate">coordenada (%sX, %sY)</string>
 </resources>

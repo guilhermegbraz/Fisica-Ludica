@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_home_layout"
     tools:context=".view.fragments.HomeFragment"
 >
 
@@ -34,5 +35,6 @@
             app:layout_constraintEnd_toEndOf="@+id/home_fragment_logo_image"
             app:layout_constraintStart_toStartOf="@+id/home_fragment_logo_image"
             android:contentDescription="@string/home_fragment_image_button_start_description"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
