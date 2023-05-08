@@ -83,12 +83,14 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
     }
 
 
-    private val repository = GameLevelFirestoreRepository()
-    private val repositoryHint = GameHintFirestoreRepository()
+    private val gameLevelRepository: GameLevelFirestoreRepository
+    private val gameHintRepository: GameHintFirestoreRepository
     val app: Application
 
     init {
         app = application
+        gameLevelRepository = GameLevelFirestoreRepository(app)
+        gameHintRepository = GameHintFirestoreRepository(app)
         //application.resources.assets.open("enunciados.json").use {
            // repositoryHint.loadData(it)
         //}
@@ -98,7 +100,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
     fun getGameLevelById(id: Long) = liveData {
         try {
             emit(Status.Loading)
-            val gameLevel = repository.getGameLevelById(id)
+            val gameLevel = gameLevelRepository.getGameLevelById(id)
             changeCurrentGameHint(gameLevel.id)
             emit(Status.Success(Result.SingleGameLevel(gameLevel)))
         } catch (e: Exception) {
@@ -108,7 +110,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
 
     private suspend fun changeCurrentGameHint(id: Long)  {
         try {
-            val hint = repositoryHint.getHintByGameLevelId(id)
+            val hint = gameHintRepository.getHintByGameLevelId(id)
             currentHintCollection.value = hint
         } catch (e: Exception) {
         }
@@ -117,7 +119,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
     fun getAllGameLevels() = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.GameLevelList(repository.getAll())))
+            emit(Status.Success(Result.GameLevelList(gameLevelRepository.getAll())))
         } catch (e: Exception) {
             Log.d("erro firestore", e.toString())
             emit(Status.Failure(Exception("Failed to get elements", e)))

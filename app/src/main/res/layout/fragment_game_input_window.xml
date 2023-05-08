@@ -127,9 +127,9 @@
             android:background="@color/grey"
 
             android:fontFamily="@font/games_italic"
-            app:layout_constraintBottom_toTopOf="@id/game_fragment_target"
+            app:layout_constraintBottom_toBottomOf="@id/game_fragment_target"
             app:layout_constraintEnd_toStartOf="@+id/game_fragment_target"
-            app:layout_constraintTop_toBottomOf="@id/game_fragment_play_botton"
+            app:layout_constraintTop_toTopOf="@id/game_fragment_target"
             app:layout_constraintVertical_bias="0.9"
 
     />

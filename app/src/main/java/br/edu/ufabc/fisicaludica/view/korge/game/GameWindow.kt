@@ -50,7 +50,7 @@ class GameWindow(private val gameWindowWidth:Double, private val gameWindowHeigh
         target = targetView(
             coordMetersToPixelX(gameMap.targetHeight),
             coordMetersToPixelX(gameMap.targetHeight/5.5),
-            coordMetersToPixelX(gameMap.elementsPosition.posXTarget - gameMap.targetHeight/2),
+            coordMetersToPixelX(gameMap.elementsPosition.posXTarget - gameMap.targetHeight/1.5),
             coordMetersToPixelY(gameMap.elementsPosition.posYTarget + gameMap.targetHeight/5.5 + gameMap.projectileWidth/3),
             gameMap.elementsPosition.targetRotation, targetImageBitmap)
 
