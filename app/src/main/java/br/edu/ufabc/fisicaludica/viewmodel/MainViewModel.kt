@@ -5,11 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import br.edu.ufabc.fisicaludica.model.dataproviders.GameLevelFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameHintFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameLevelFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.domain.GameHint
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.InputStream
 
@@ -26,7 +25,14 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
     }
 
     val isAppBarVisible by lazy {
-        MutableLiveData<Boolean>(true)
+        MutableLiveData(true)
+    }
+    val currentFragmentWindow by lazy {
+        MutableLiveData(FragmentWindow.HomeFragment)
+    }
+
+    val currentHintCollection by lazy {
+        MutableLiveData<GameHint?>(null)
     }
 
     var fragmentResolutionWidth: Int? = null
@@ -76,27 +82,39 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
 
     }
 
+
     private val repository = GameLevelFirestoreRepository()
+    private val repositoryHint = GameHintFirestoreRepository()
     val app: Application
 
     init {
         app = application
-        /*application.resources.assets.open("maps.json").use {
-            repository.loadData(it)
-        }*/
+        //application.resources.assets.open("enunciados.json").use {
+           // repositoryHint.loadData(it)
+        //}
     }
 
 
-    fun getMapById(id: Long) = liveData {
+    fun getGameLevelById(id: Long) = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.SingleGameLevel(repository.getGameLevelById(id))))
+            val gameLevel = repository.getGameLevelById(id)
+            changeCurrentGameHint(gameLevel.id)
+            emit(Status.Success(Result.SingleGameLevel(gameLevel)))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to get element by id", e)))
         }
     }
 
-    fun getAllMaps() = liveData {
+    private suspend fun changeCurrentGameHint(id: Long)  {
+        try {
+            val hint = repositoryHint.getHintByGameLevelId(id)
+            currentHintCollection.value = hint
+        } catch (e: Exception) {
+        }
+    }
+
+    fun getAllGameLevels() = liveData {
         try {
             emit(Status.Loading)
             emit(Status.Success(Result.GameLevelList(repository.getAll())))
@@ -106,10 +124,6 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         }
     }
 
-    /**
-     * get all the game maps.
-     */
-    //fun getAllMaps() = gameLevelJsonRepository.getAll()
 
     /**
      * open inputStream for the map image.
@@ -123,8 +137,10 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         }
     }
 
-    /**
-     * get a map by id.
-     */
-    //fun getMapById(id: Long): GameLevel = gameLevelJsonRepository.getGameLevelById(id)
+}
+
+enum class FragmentWindow {
+    ListFragment,
+    HomeFragment,
+    InputGameWindow
 }

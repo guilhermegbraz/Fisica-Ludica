@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.databinding.FragmentHomeBinding
+import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(it)
             }
         }
-
+        viewModel.currentFragmentWindow.value = FragmentWindow.HomeFragment
     }
 
     override fun onResume() {

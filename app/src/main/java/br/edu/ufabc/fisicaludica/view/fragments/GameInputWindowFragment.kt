@@ -17,10 +17,8 @@ import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameInputWindowBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
-import com.soywiz.korma.math.roundDecimalPlaces
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 /**
  * Fragment for the game input data stage.
@@ -45,7 +43,7 @@ class GameInputWindowFragment : Fragment() {
 
         viewModel.clickedMapId.value?.let {
             Log.d("input window", "vou montar a tela com o id: ${it}")
-            viewModel.getMapById(it).observe(viewLifecycleOwner) { status ->
+            viewModel.getGameLevelById(it).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is MainViewModel.Status.Loading -> {
 
@@ -155,6 +153,7 @@ class GameInputWindowFragment : Fragment() {
     }
 
     private fun bindEvents() {
+        viewModel.currentFragmentWindow.value = FragmentWindow.InputGameWindow
         binding.gameFragmentPlayBotton.setOnClickListener {
             GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
                 binding.gameFragmentSlideBarTheta.value)

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameLevelListBinding
 import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 /**
@@ -64,7 +65,8 @@ class GameLevelListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.recyclerviewMapList.layoutManager = GridLayoutManager(context, 3)
-        viewModel.getAllMaps().observe(viewLifecycleOwner) { status->
+        viewModel.currentFragmentWindow.value = FragmentWindow.ListFragment
+        viewModel.getAllGameLevels().observe(viewLifecycleOwner) { status->
             when(status) {
                 is MainViewModel.Status.Loading -> {
                     binding.progressHorizontal.visibility = View.VISIBLE

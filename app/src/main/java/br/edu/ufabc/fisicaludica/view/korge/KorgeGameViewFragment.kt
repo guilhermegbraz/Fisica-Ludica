@@ -42,7 +42,7 @@ class KorgeGameViewFragment : Fragment() {
         hideAppBar()
         binding.toolContainer.addView(korgeAndroidView)
         viewModel.clickedMapId.value?.let {
-            viewModel.getMapById(it).observe(viewLifecycleOwner) { status ->
+            viewModel.getGameLevelById(it).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is MainViewModel.Status.Loading -> {
 

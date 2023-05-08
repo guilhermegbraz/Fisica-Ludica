@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.ActivityMainBinding
+import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
 
 /**
@@ -53,8 +54,25 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.main_activity_pause_button->{
-                    val dialog = DialogPause()
-                    dialog.show(supportFragmentManager, "pause dialog")
+                    when(viewModel.currentFragmentWindow.value) {
+
+                        FragmentWindow.ListFragment -> {
+                            val dialog = DialogPause(listOf(getString(R.string.list_fragment_hint)),0 )
+                            dialog.show(supportFragmentManager, "pause dialog")
+                        }
+                        FragmentWindow.HomeFragment -> {
+                            val dialog = DialogPause(listOf(getString(R.string.home_fragment_hint)),0 )
+                            dialog.show(supportFragmentManager, "pause dialog")
+                        }
+                        FragmentWindow.InputGameWindow -> {
+                            viewModel.currentHintCollection.value?.let {gameHint->
+                                val dialog = DialogPause(gameHint.hints,0 )
+                                dialog.show(supportFragmentManager, "pause dialog")
+                            }
+
+                        }
+                        null -> TODO()
+                    }
                     true
                 }
                 else -> false
