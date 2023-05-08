@@ -33,8 +33,19 @@
     <string name="game_fragment_coordinate">coordenada (%sX, %sY)</string>
 
     <string name="home_fragment_hint">Bem vindo ao Física Ludica, um jogo para voce exercitar seu conhecimento sobre
-        Movimento em Duas Dimensões</string>
+        Movimento em Duas Dimensoes
+    </string>
 
-    <string name="list_fragment_hint">Aqui voce deve selecionar uma fase para jogar, cada fase retrata uma situacao diferente de lancamento obliquo</string>
+    <string name="list_fragment_hint">Aqui voce deve selecionar uma fase para jogar, cada fase retrata uma situacao
+        diferente de lancamento obliquo
+    </string>
+    <string name="auth_fragment_game_description">Bem vindo ao Fisica Ludica, um aplicativo
+para voce treinar seus conhecimentos em
+movimentos bidimensionais.
+
+Aqui voce vai encontrar simulacoes
+interativas de lancamento obliquo.
+Faca o login e venha jogar
+    </string>
 
 </resources>

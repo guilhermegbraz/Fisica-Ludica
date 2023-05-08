@@ -12,15 +12,13 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
             android:id="@+id/home_fragment_logo_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_fisica_ludica_1"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/logo_fisica_ludica"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.499"
-            app:layout_constraintVertical_bias="0.088"
+
             android:contentDescription="@string/home_fragment_image_view_logo_description"/>
 
     <ImageButton

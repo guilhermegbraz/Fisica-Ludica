@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/destination_home">
+            app:startDestination="@id/authFragment">
 
     <fragment
             android:id="@+id/destination_home"
@@ -81,5 +81,15 @@
                 app:destination="@id/gameResultFragment"
         />
 
+    </fragment>
+    <fragment android:id="@+id/authFragment" android:name="br.edu.ufabc.fisicaludica.view.fragments.AuthFragment"
+              android:label="fragment_auth" tools:layout="@layout/fragment_auth">
+
+        <action
+                android:id="@+id/goToHome"
+                app:destination="@id/destination_home"
+                app:popUpToInclusive="true"
+                app:popUpTo="@id/nav_graph"
+        />
     </fragment>
 </navigation>

@@ -9,6 +9,7 @@ import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameHintFirestore
 import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameLevelFirestoreRepository
 import br.edu.ufabc.fisicaludica.model.domain.GameHint
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import java.io.FileNotFoundException
 import java.io.InputStream
 
@@ -80,6 +81,10 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             val value: GameLevel
         ) : Result()
 
+        /**
+         * A Result without value.
+         */
+        object EmptyResult : Result()
     }
 
 
@@ -103,6 +108,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             val gameLevel = gameLevelRepository.getGameLevelById(id)
             changeCurrentGameHint(gameLevel.id)
             emit(Status.Success(Result.SingleGameLevel(gameLevel)))
+            Log.d("teste velo", "O objeto saiu da viewModel com velocidade = ${gameLevel.worldAtributtes.initialVelocity}")
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to get element by id", e)))
         }
@@ -139,10 +145,24 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /**
+     * Update a answer.
+     */
+    fun update(gameLevelAnswer: GameLevelAnswer, gameLevelId: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            gameLevelRepository.addOrUpdateAnswer(gameLevelAnswer, gameLevelId)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update element", e)))
+        }
+    }
+
 }
 
 enum class FragmentWindow {
     ListFragment,
     HomeFragment,
-    InputGameWindow
+    InputGameWindow,
+    AuthenticationFragment
 }
