@@ -2,6 +2,7 @@ package br.edu.ufabc.fisicaludica.view.korge
 
 import br.edu.ufabc.fisicaludica.model.domain.GameGuess
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.view.korge.game.*
 import com.soywiz.klock.TimeSpan
 import com.soywiz.korge.scene.Scene
@@ -13,7 +14,7 @@ import com.soywiz.korio.file.std.resourcesVfs
 
 
 
-class GameWorldScene(val gameMap : GameLevel, private val gameGuess: GameGuess) : Scene() {
+class GameWorldScene(val gameMap : GameLevel, private val answer: GameLevelAnswer) : Scene() {
 
 
     override suspend fun SContainer.sceneInit() {
@@ -29,7 +30,7 @@ class GameWorldScene(val gameMap : GameLevel, private val gameGuess: GameGuess) 
 
         launch {
             delay(TimeSpan(2000.0))
-            gameWindow.launchProjectile(gameGuess.initialVelocity.toFloat(), gameGuess.initialAngle.toFloat())
+            gameWindow.launchProjectile(answer.velocity.toFloat(), answer.angle.toFloat())
         }
 
 

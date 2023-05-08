@@ -3,6 +3,7 @@ package br.edu.ufabc.fisicaludica.view.korge
 
 import br.edu.ufabc.fisicaludica.model.domain.GameGuess
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korinject.AsyncInjector
@@ -14,7 +15,7 @@ class CustomModule (
     private val width: Int = DEFAULT_WIDTH,
     private val height: Int = DEFAULT_HEIGHT,
     private val gameLevel: GameLevel,
-    private val gameGuess: GameGuess,
+    private val answer: GameLevelAnswer,
     val callback: () -> Unit,
     )
     : Module() {
@@ -33,6 +34,6 @@ class CustomModule (
     override val mainScene: KClass<out Scene> = GameWorldScene::class
 
     override suspend fun AsyncInjector.configure() {
-        mapPrototype { GameWorldScene(gameLevel, gameGuess) }
+        mapPrototype { GameWorldScene(gameLevel, answer) }
     }
 }

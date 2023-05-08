@@ -1,12 +1,16 @@
 package br.edu.ufabc.fisicaludica.model.dataproviders.firestore
 
+import android.util.Log
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAtributtes
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelElementsPosition
 
 data class GameLevelFirestore(
     val gameLevelId: Long? = null,
     val backgroundUrl: String? = null,
+    val correctAngle: Double? = null,
+    val correctVelocity: Double? = null,
     val gravityX: Double? = null,
     val gravityY: Double? = null,
     val groundPosition: Double? = null,
@@ -22,15 +26,20 @@ data class GameLevelFirestore(
     val title: String? = null,
     val widthInMeters: Double? = null,
 ) {
-    fun toGameLevel(): GameLevel = GameLevel(
+    fun toGameLevel(): GameLevel  {
+        return GameLevel(
             id= gameLevelId?:0,
             title= this.title?:"",
             groundPosition = this.groundPosition?: 0.0,
             widthMeters = this.widthInMeters?:0.0,
             elementsPosition = createGameLevelElementsPosition(),
             worldAtributtes = createGameLevelAtributes(),
-            backgroudUrl = this.backgroundUrl?: ""
+            backgroudUrl = this.backgroundUrl?: "",
+            correctAnswer = createGameLevelAnswer()
         )
+
+
+    }
 
     fun createGameLevelAtributes(): GameLevelAtributtes {
         val isAngleVariable = this.angleVariable == true
@@ -49,4 +58,7 @@ data class GameLevelFirestore(
             this.targetPositionX?: 20.0,
             this.targetPositionY?: 0.0,
             this.targetRotation?: 0)
+    fun createGameLevelAnswer(): GameLevelAnswer =
+        GameLevelAnswer(correctAngle?: 0.0, correctVelocity?: 0.0)
+
 }

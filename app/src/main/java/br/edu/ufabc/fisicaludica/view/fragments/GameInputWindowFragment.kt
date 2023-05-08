@@ -154,6 +154,7 @@ class GameInputWindowFragment : Fragment() {
 
     private fun bindEvents() {
         viewModel.currentFragmentWindow.value = FragmentWindow.InputGameWindow
+
         binding.gameFragmentPlayBotton.setOnClickListener {
             GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
                 binding.gameFragmentSlideBarTheta.value)

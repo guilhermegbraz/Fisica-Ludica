@@ -4,11 +4,16 @@ package br.edu.ufabc.fisicaludica.model.domain
 /**
  * domain class for game map.
  */
-class GameLevel (id:Long, backgroudUrl: String, title: String, groundPosition: Double,
-                 widthMeters: Double,
-                 elementsPosition: GameLevelElementsPosition,
-                 worldAtributtes: GameLevelAtributtes
-                 ) {
+class GameLevel (
+    id:Long,
+    backgroudUrl: String,
+    title: String,
+    groundPosition: Double,
+    widthMeters: Double,
+    elementsPosition: GameLevelElementsPosition,
+    worldAtributtes: GameLevelAtributtes,
+    correctAnswer: GameLevelAnswer
+    ) {
     var id: Long
         private set
       var backgroudUrl: String
@@ -17,10 +22,9 @@ class GameLevel (id:Long, backgroudUrl: String, title: String, groundPosition: D
         private set
     val widthMeters: Double
     val groundPosition: Double
-
     val elementsPosition : GameLevelElementsPosition
-
     val worldAtributtes: GameLevelAtributtes
+    val correctAnswer:GameLevelAnswer
 
     val targetHeight = 3.0
     val projectileLauncherWidht = 4.0
@@ -37,6 +41,6 @@ class GameLevel (id:Long, backgroudUrl: String, title: String, groundPosition: D
         this.elementsPosition = elementsPosition
         this.widthMeters = widthMeters
         this.worldAtributtes = worldAtributtes
-
+        this.correctAnswer = correctAnswer
     }
 }
