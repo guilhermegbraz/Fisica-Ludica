@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.model.dataproviders
+package br.edu.ufabc.fisicaludica.model.dataproviders.inMemory
 
 import android.util.Log
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
@@ -10,7 +10,7 @@ import java.io.InputStream
 /**
  * repository for maps.
  */
-class GameLevelJsonRepository (private val mapDtoToMapParser: MapDtoToMap): GameLevelRepository{
+class GameLevelJsonRepository (private val gameLevelDtoToGameLevelParser: GameLevelDtoToGameLevel): GameLevelRepository{
     private lateinit var gameLevels: List<GameLevel>
 
     /**
@@ -18,7 +18,7 @@ class GameLevelJsonRepository (private val mapDtoToMapParser: MapDtoToMap): Game
      */
     fun loadData(inputStream: InputStream) {
         try {
-            gameLevels = Klaxon().parseArray<GameLevelDTO>(inputStream)?.map { this.mapDtoToMapParser.execute(it) } ?: emptyList()
+            gameLevels = Klaxon().parseArray<GameLevelDTO>(inputStream)?.map { this.gameLevelDtoToGameLevelParser.execute(it) } ?: emptyList()
         } catch (exception: KlaxonException) {
             Log.d("klaxon", "Failed to parse json file")
         }

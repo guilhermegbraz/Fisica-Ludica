@@ -1,4 +1,6 @@
-package br.edu.ufabc.fisicaludica.model.dataproviders
+package br.edu.ufabc.fisicaludica.model.dataproviders.inMemory
+
+import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameLevelFirestore
 
 /**
  * Dto class for parsing the game map.
@@ -21,8 +23,8 @@ data class GameLevelDTO(
     val gravityX: Double,
     val gravityY: Double) {
 
-    fun toFirestore(): GameLevelFirestoreRepository.GameLevelFirestore {
-        return GameLevelFirestoreRepository.GameLevelFirestore(id, background, gravityX, gravityY, groundPosition
+    fun toFirestore(): GameLevelFirestore {
+        return GameLevelFirestore(id, background, gravityX, gravityY, groundPosition
         , initialAngleDegrees, initialVelocity, isAngleVariable, isVelocityVariable, launcherPositionX,
             launcherPositionY, targetPositionX, targetPositionY, targetRotation, title, widthInMeters
         )

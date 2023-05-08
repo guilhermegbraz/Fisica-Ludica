@@ -1,4 +1,4 @@
-package br.edu.ufabc.fisicaludica.model.dataproviders
+package br.edu.ufabc.fisicaludica.model.dataproviders.inMemory
 
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAtributtes
@@ -7,7 +7,7 @@ import br.edu.ufabc.fisicaludica.model.domain.GameLevelElementsPosition
 /**
  * Parser to map.
  */
-class MapDtoToMap {
+class GameLevelDtoToGameLevel {
 
     fun execute(gameLevelDTO: GameLevelDTO): GameLevel {
         return GameLevel(gameLevelDTO.id, gameLevelDTO.background, gameLevelDTO.title, gameLevelDTO.groundPosition,
