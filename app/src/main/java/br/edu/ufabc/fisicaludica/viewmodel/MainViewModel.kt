@@ -96,9 +96,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         app = application
         gameLevelRepository = GameLevelFirestoreRepository(app)
         gameHintRepository = GameHintFirestoreRepository(app)
-        //application.resources.assets.open("enunciados.json").use {
-           // repositoryHint.loadData(it)
-        //}
+
     }
 
 
@@ -155,6 +153,16 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to update element", e)))
+        }
+    }
+
+    fun enableNextGameLevel(gameLevelId: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            gameLevelRepository.enableNextLevel(gameLevelId)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(e))
         }
     }
 

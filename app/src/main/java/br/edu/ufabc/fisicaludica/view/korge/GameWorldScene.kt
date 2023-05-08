@@ -1,6 +1,5 @@
 package br.edu.ufabc.fisicaludica.view.korge
 
-import br.edu.ufabc.fisicaludica.model.domain.GameGuess
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.view.korge.game.*

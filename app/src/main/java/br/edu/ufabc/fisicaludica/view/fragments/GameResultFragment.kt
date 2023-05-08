@@ -45,6 +45,7 @@ class GameResultFragment : Fragment() {
                 binding.gameResultFragmentLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.green_dark))
                 binding.gameResultFragmentCard.setBackgroundColor(ContextCompat.getColor(context, R.color.green_light))
                 binding.resultGameFragmentImage.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.trofeu_vencedor))
+                callEnableNextLevel()
             }
             else{
                 binding.gameResultFragmentLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.red_dark))
@@ -76,6 +77,21 @@ class GameResultFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.isAppBarVisible.value = true
+    }
+
+    fun callEnableNextLevel() {
+        viewModel.enableNextGameLevel(viewModel.clickedMapId.value!!).observe(viewLifecycleOwner) {status->
+            when(status) {
+                is MainViewModel.Status.Failure -> {
+                }
+                MainViewModel.Status.Loading -> {
+
+                }
+                is MainViewModel.Status.Success -> {
+
+                }
+            }
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package br.edu.ufabc.fisicaludica.view.fragments.maplistfragment
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -46,17 +49,29 @@ class GameLevelListFragment : Fragment() {
         override fun getItemCount(): Int = gameLevels.size
 
         override fun onBindViewHolder(holder: GameLevelHolder, position: Int) {
-            val map = gameLevels[position]
-            holder.title.text = map.title
-            holder.imageView.setImageDrawable(
-                Drawable.createFromStream(viewModel.getMapBackgroundInputStream(map), map.backgroudUrl)
-            )
+            val gameLevel = gameLevels[position]
+            holder.title.text = gameLevel.title
 
-            holder.card.setOnClickListener{
-                viewModel.clickedMapId.value = map.id
-                Log.d("list fragment", "o usuario clicou no level de id: ${viewModel.clickedMapId.value}")
-                GameLevelListFragmentDirections.goToGameFragment().let { action ->
-                    findNavController().navigate(action)
+            val originalDrawable = Drawable.createFromStream(viewModel.getMapBackgroundInputStream(gameLevel), gameLevel.backgroudUrl)!!
+
+            if(gameLevel.isEnable.not()) {
+                val colorMatrix = ColorMatrix().apply {
+                    setSaturation(0f)
+                }
+                val blackAndWhiteDrawable = DrawableCompat.wrap(originalDrawable).mutate()
+                blackAndWhiteDrawable.colorFilter = ColorMatrixColorFilter(colorMatrix)
+                holder.imageView.setImageDrawable(
+                    blackAndWhiteDrawable
+                )
+            } else holder.imageView.setImageDrawable(originalDrawable)
+
+            if(gameLevel.isEnable) {
+                holder.card.setOnClickListener{
+                    viewModel.clickedMapId.value = gameLevel.id
+                    Log.d("list fragment", "o card eh clickavel? ${it.isClickable}")
+                    GameLevelListFragmentDirections.goToGameFragment().let { action ->
+                        findNavController().navigate(action)
+                    }
                 }
             }
         }

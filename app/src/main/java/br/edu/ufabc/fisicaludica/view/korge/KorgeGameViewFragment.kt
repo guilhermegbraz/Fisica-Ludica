@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
-import br.edu.ufabc.fisicaludica.model.domain.GameGuess
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel

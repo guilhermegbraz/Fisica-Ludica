@@ -14,6 +14,12 @@ class GameLevel (
     worldAtributtes: GameLevelAtributtes,
     correctAnswer: GameLevelAnswer
     ) {
+
+    companion object {
+        const val targetH = 3.0
+        const val projectileLauncherW = 4.0
+        const val projectileW = 1.2
+    }
     var id: Long
         private set
       var backgroudUrl: String
@@ -26,12 +32,11 @@ class GameLevel (
     val worldAtributtes: GameLevelAtributtes
     val correctAnswer:GameLevelAnswer
 
-    val targetHeight = 3.0
-    val projectileLauncherWidht = 4.0
-    val projectileWidth = 1.2
+    var isEnable: Boolean = false
 
-
-
+    val targetHeight = targetH
+    val projectileLauncherWidht = projectileLauncherW
+    val projectileWidth = projectileW
 
     init {
         this.id = id

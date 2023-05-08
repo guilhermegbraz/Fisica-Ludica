@@ -58,9 +58,21 @@ class AuthFragment : Fragment() {
     }
 
     private fun launchTaskList() {
-        AuthFragmentDirections.goToHome().let{
-            findNavController().navigate(it)
+        viewModel.enableNextGameLevel(0).observe(viewLifecycleOwner) {status->
+            when(status) {
+                is MainViewModel.Status.Failure -> {
+                }
+                MainViewModel.Status.Loading -> {
+
+                }
+                is MainViewModel.Status.Success -> {
+                    AuthFragmentDirections.goToHome().let{
+                        findNavController().navigate(it)
+                    }
+                }
+            }
         }
+
     }
 
     private fun launchAuthUi() {
