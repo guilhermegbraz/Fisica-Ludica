@@ -6,12 +6,13 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelRepository
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.soywiz.kmem.NewFast32Buffer
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -22,6 +23,8 @@ class GameLevelFirestoreRepository(application: Application) : GameLevelReposito
     companion object {
         private const val gameLevelCollection = "game_levels"
         private const val gameLevelIdDoc = "gameLevelId"
+        private const val gameAnswerCollection = "answers"
+        private const val userIdDoc = "userId"
 
         private object GameLevelDoc {
             const val id = "gameLevelId"
@@ -65,25 +68,90 @@ class GameLevelFirestoreRepository(application: Application) : GameLevelReposito
 
     }
 
+    data class GameLevelAnswerFirestore(
+        val userId: String? = null,
+        val angle: Double? = null,
+        val velocity: Double? = null
+    ) {
+        fun toGameLevelAnswer(): GameLevelAnswer {
+            val result = GameLevelAnswer( angle?: 0.0, velocity?: 0.0)
+            return result
+        }
+
+    }
+
     private fun getSource() = if (isConnected.get()) Source.DEFAULT else Source.CACHE
 
+    private fun getCurrentUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+        ?: throw Exception("No user is signed in")
+
     private fun getCollection() = db.collection(gameLevelCollection)
-     override suspend fun getAll(): List<GameLevel> {
-         return getCollection()
+     override suspend fun getAll(): List<GameLevel> =
+         getCollection()
              .get(getSource())
              .await()
              .toObjects(GameLevelFirestore::class.java).map { it.toGameLevel() }
-     }
 
-    override suspend fun getGameLevelById(id: Long): GameLevel =
-        getCollection()
-        .whereEqualTo(gameLevelIdDoc, id)
-        .get(getSource())
-        .await()
-        .toObjects(GameLevelFirestore::class.java)
-        .first()
-        .toGameLevel()
 
+
+    override suspend fun getGameLevelById(id: Long): GameLevel {
+        val result =
+            getCollection()
+                .whereEqualTo(gameLevelIdDoc, id)
+                .get(getSource())
+                .await()
+                .documents
+                .first()
+        val gameLevel = result.toObject(GameLevelFirestore::class.java)!!.toGameLevel()
+
+        result.reference
+            .collection(gameAnswerCollection)
+            .whereEqualTo(userIdDoc, getCurrentUser())
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if(querySnapshot.isEmpty.not()) {
+                    val gameAnswer =
+                    querySnapshot.first()
+                    .toObject(GameLevelAnswerFirestore::class.java)
+                    .toGameLevelAnswer()
+
+                    gameLevel.worldAtributtes.initialVelocity = gameAnswer.velocity
+                    gameLevel.worldAtributtes.initialAngleDegrees = gameAnswer.angle
+                }
+            }
+
+        return gameLevel
+    }
+
+    suspend fun addOrUpdateAnswer(gameLevelAnswer: GameLevelAnswer, gameLevelId: Long) {
+        val gameAnswerFirestore = GameLevelAnswerFirestore(
+            userId = getCurrentUser(),
+            angle = gameLevelAnswer.angle,
+            velocity = gameLevelAnswer.velocity
+        )
+        val reference = getCollection()
+            .whereEqualTo(gameLevelIdDoc, gameLevelId)
+            .get(getSource())
+            .await()
+            .documents
+            .first()
+            .reference
+            .collection(gameAnswerCollection)
+
+        reference
+            .whereEqualTo(userIdDoc, gameAnswerFirestore.userId)
+            .get(getSource())
+            .await()
+            .let { querySnapshot ->
+                if(querySnapshot.isEmpty) {
+                    reference.add(gameAnswerFirestore)
+                }
+                else querySnapshot.first().reference.set(gameAnswerFirestore)
+            }
+
+
+    }
 
     fun add(gameLevelFirestore: GameLevelFirestore) {
         getCollection().add(gameLevelFirestore)

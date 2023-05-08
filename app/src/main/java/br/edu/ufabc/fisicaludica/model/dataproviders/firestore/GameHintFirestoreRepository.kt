@@ -5,7 +5,6 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.util.Log
-import br.edu.ufabc.fisicaludica.model.dataproviders.inMemory.GameLevelDTO
 import br.edu.ufabc.fisicaludica.model.domain.GameHint
 import br.edu.ufabc.fisicaludica.model.domain.GameHintRepository
 import com.beust.klaxon.Klaxon
