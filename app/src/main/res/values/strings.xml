@@ -31,4 +31,10 @@
     <string name="game_fragment_default_angle">angulo inicial = 45º</string>
     <string name="game_fragment_default_coordinate">coordenada (aX, bY)</string>
     <string name="game_fragment_coordinate">coordenada (%sX, %sY)</string>
+
+    <string name="home_fragment_hint">Bem vindo ao Física Ludica, um jogo para voce exercitar seu conhecimento sobre
+        Movimento em Duas Dimensões</string>
+
+    <string name="list_fragment_hint">Aqui voce deve selecionar uma fase para jogar, cada fase retrata uma situacao diferente de lancamento obliquo</string>
+
 </resources>
