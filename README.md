@@ -24,3 +24,9 @@ inicialmente ainda não foi implementado a animação do lançamento do projetil
 
 https://user-images.githubusercontent.com/84741834/230933154-4cb409b3-7736-472c-acc6-4f05deff1df6.mp4
 
+## Executando o aplicativo
+A camada Model define um Repositório baseado em Firebase Firestore. Portanto, você precisa
+definir um novo projeto na sua conta do Firebase, habilitar o Firestore, cadastrar o aplicativo
+e, por fim, copiar o arquivo google-services.json dentro do projeto Android Studio.
+Tudo isso deve ser feito antes de executar o aplicativo pela primeira vez, caso contrário
+ocorrerá erro de execução.
