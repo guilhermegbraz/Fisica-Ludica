@@ -1,10 +1,9 @@
 package br.edu.ufabc.fisicaludica.model.domain
 
 class GameLevelAtributtes(
-    val initialVelocity: Double,
+    var initialVelocity: Double,
     val isVelocityVariable: Boolean,
-
-    val initialAngleDegrees: Double,
+    var initialAngleDegrees: Double,
     val isAngleVariable: Boolean,
     val gravityX: Double,
     val gravityY: Double,

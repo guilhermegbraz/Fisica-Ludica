@@ -9,6 +9,15 @@
         tools:context=".view.fragments.GameResultFragment"
         android:background="@android:color/holo_green_dark"
              >
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"

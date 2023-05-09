@@ -17,10 +17,10 @@ import androidx.navigation.fragment.findNavController
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameInputWindowBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
+import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
-import com.soywiz.korma.math.roundDecimalPlaces
-import java.math.BigDecimal
-import java.math.RoundingMode
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragment for the game input data stage.
@@ -33,7 +33,6 @@ class GameInputWindowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameInputWindowBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -44,14 +43,14 @@ class GameInputWindowFragment : Fragment() {
         binding.gameFragmentGameWindow.visibility = View.INVISIBLE
 
         viewModel.clickedMapId.value?.let {
-            Log.d("input window", "vou montar a tela com o id: ${it}")
-            viewModel.getMapById(it).observe(viewLifecycleOwner) { status ->
+            viewModel.getGameLevelById(it).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is MainViewModel.Status.Loading -> {
-
+                        binding.progressHorizontal.visibility = View.VISIBLE
                     }
                     is MainViewModel.Status.Success -> {
                         val gameLevel = (status.result as MainViewModel.Result.SingleGameLevel).value
+                        Log.d("teste velocidade", "O game veio com velocidade = ${gameLevel.worldAtributtes.initialVelocity}")
                         setBackground(gameLevel)
                         setElementsState(gameLevel)
                         elementsPosition(
@@ -65,7 +64,10 @@ class GameInputWindowFragment : Fragment() {
                         binding.gameFragmentGameWindow.visibility = View.VISIBLE
                     }
                     is MainViewModel.Status.Failure -> {
-
+                        Log.e("FRAGMENT", "Failed to get gameLevel ", status.e)
+                        Snackbar.make(binding.root, "Failed start the game", Snackbar.LENGTH_LONG)
+                            .show()
+                        binding.progressHorizontal.visibility = View.INVISIBLE
                     }
                 }
             }
@@ -155,12 +157,33 @@ class GameInputWindowFragment : Fragment() {
     }
 
     private fun bindEvents() {
+        viewModel.currentFragmentWindow.value = FragmentWindow.InputGameWindow
+
         binding.gameFragmentPlayBotton.setOnClickListener {
-            GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
-                binding.gameFragmentSlideBarTheta.value)
-                .let {
-                    findNavController().navigate(it)
+            viewModel.update(
+                GameLevelAnswer(angle =binding.gameFragmentSlideBarTheta.value.toDouble(),
+                    binding.gameFragmentSlideBarVelocity.value.toDouble()), viewModel.clickedMapId.value!!)
+                .observe(viewLifecycleOwner) {status->
+                    when(status) {
+                        is MainViewModel.Status.Failure -> {
+                            Log.e("FRAGMENT", "Failed to get gameLevel ", status.e)
+                            Snackbar.make(binding.root, "Failed save your inputs for the game", Snackbar.LENGTH_LONG)
+                                .show()
+                        }
+                        MainViewModel.Status.Loading -> {
+                            binding.progressHorizontal.visibility = View.VISIBLE
+                        }
+                        is MainViewModel.Status.Success -> {
+                            GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,
+                                binding.gameFragmentSlideBarTheta.value)
+                                .let {
+                                    findNavController().navigate(it)
+                                }
+                        }
+                    }
+
                 }
+
         }
         binding.gameFragmentSlideBarVelocity.addOnChangeListener { _, value, _ ->
             val velocity = "$value m/s"

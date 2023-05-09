@@ -1,15 +1,14 @@
 package br.edu.ufabc.fisicaludica.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import br.edu.ufabc.fisicaludica.model.dataproviders.GameLevelFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameHintFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.dataproviders.firestore.GameLevelFirestoreRepository
+import br.edu.ufabc.fisicaludica.model.domain.GameHint
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import java.io.FileNotFoundException
 import java.io.InputStream
 
@@ -26,7 +25,14 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
     }
 
     val isAppBarVisible by lazy {
-        MutableLiveData<Boolean>(true)
+        MutableLiveData(true)
+    }
+    val currentFragmentWindow by lazy {
+        MutableLiveData(FragmentWindow.HomeFragment)
+    }
+
+    val currentHintCollection by lazy {
+        MutableLiveData<GameHint?>(null)
     }
 
     var fragmentResolutionWidth: Int? = null
@@ -74,42 +80,54 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             val value: GameLevel
         ) : Result()
 
+        /**
+         * A Result without value.
+         */
+        object EmptyResult : Result()
     }
 
-    private val repository = GameLevelFirestoreRepository()
+
+    private val gameLevelRepository: GameLevelFirestoreRepository
+    private val gameHintRepository: GameHintFirestoreRepository
     val app: Application
 
     init {
         app = application
-        /*application.resources.assets.open("maps.json").use {
-            repository.loadData(it)
-        }*/
+        gameLevelRepository = GameLevelFirestoreRepository(app)
+        gameHintRepository = GameHintFirestoreRepository(app)
+
     }
 
 
-    fun getMapById(id: Long) = liveData {
+    fun getGameLevelById(id: Long) = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.SingleGameLevel(repository.getGameLevelById(id))))
+            val gameLevel = gameLevelRepository.getGameLevelById(id)
+            changeCurrentGameHint(gameLevel.id)
+            emit(Status.Success(Result.SingleGameLevel(gameLevel)))
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to get element by id", e)))
         }
     }
 
-    fun getAllMaps() = liveData {
+    private suspend fun changeCurrentGameHint(id: Long)  {
+        try {
+            val hint = gameHintRepository.getHintByGameLevelId(id)
+            currentHintCollection.value = hint
+        } catch (e: Exception) {
+            throw Exception("Failed to get the hints for the current level")
+        }
+    }
+
+    fun getAllGameLevels() = liveData {
         try {
             emit(Status.Loading)
-            emit(Status.Success(Result.GameLevelList(repository.getAll())))
+            emit(Status.Success(Result.GameLevelList(gameLevelRepository.getAll())))
         } catch (e: Exception) {
-            Log.d("erro firestore", e.toString())
             emit(Status.Failure(Exception("Failed to get elements", e)))
         }
     }
 
-    /**
-     * get all the game maps.
-     */
-    //fun getAllMaps() = gameLevelJsonRepository.getAll()
 
     /**
      * open inputStream for the map image.
@@ -118,13 +136,38 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         try {
             return app.resources.assets.open(gameLevel.backgroudUrl)
         } catch (e: FileNotFoundException) {
-            Log.d("FNF", "Não encontrei o arquivo ${gameLevel.backgroudUrl}")
-            throw e
+            throw Exception("File not found exception trying to open  ${gameLevel.backgroudUrl}")
         }
     }
 
     /**
-     * get a map by id.
+     * Update a answer.
      */
-    //fun getMapById(id: Long): GameLevel = gameLevelJsonRepository.getGameLevelById(id)
+    fun update(gameLevelAnswer: GameLevelAnswer, gameLevelId: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            gameLevelRepository.addOrUpdateAnswer(gameLevelAnswer, gameLevelId)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Failed to update element", e)))
+        }
+    }
+
+    fun enableNextGameLevel(gameLevelId: Long) = liveData {
+        try {
+            emit(Status.Loading)
+            gameLevelRepository.enableNextLevel(gameLevelId)
+            emit(Status.Success(Result.EmptyResult))
+        } catch (e: Exception) {
+            emit(Status.Failure(Exception("Unable to unlock the next level", e)))
+        }
+    }
+
+}
+
+enum class FragmentWindow {
+    ListFragment,
+    HomeFragment,
+    InputGameWindow,
+    AuthenticationFragment
 }

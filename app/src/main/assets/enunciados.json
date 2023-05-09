@@ -1,0 +1,41 @@
+[
+  {
+    "hintId" : 1,
+    "gameLevelId": 1,
+    "hints": ["Encontre a velocidade de lançamento para que o projetil intercepte o alvo em x = 28,17 em 3 segundos",
+    "Decomponha o vetor velocidade em duas componentes, isto e, separa o movimento em duas dimensoes","Observe que o movimento em x trata-se de um movimento retilineo uniforme",
+      "Tente usar a função horaria da posição no movimento retilineo uniforme, i.e, S = So + Vo*t "]
+  },
+  {"hintId" : 2,
+    "gameLevelId": 2,
+    "hints": ["Encontre a velocidade de lançamento para que o projetil intercepte o alvo em y = 68,81 em 3 segundos",
+      "Decomponha o vetor velocidade em duas componentes, isto e, separa o movimento em duas dimensoes e trabalhe com o movimento em y","Observe que o movimento em y trata-se de um movimento uniformemente variado (MUV)",
+      "Tente usar a função horaria da posição no MUV, i.e, S = So + Vo*t + (a*t^2)/2 "]
+  },
+  {"hintId" : 3,
+    "gameLevelId": 3,
+    "hints": ["Encontre o angulo de lançamento para que o projetil intercepte o alvo em (45,0) sabendo que a velocidade de lançamento e 21 m/s",
+      "Decomponha o vetor velocidade em duas componentes, isto e, separa o movimento em duas dimensoes e trabalhe com os dois movimentos",
+      "Encontre o tempo que o projetil leva para atingir sua altura maxima, i.e, quando a aceleração da gravidade desacelerou o projetil até que sua velocidade no eixo y e igual a 0",
+      "Para a dica anterior, Vf = Vi + a*t, onde Vf = velocidade final, Vi = velocidade inicial e a = aceleração (se a aceleração for contraria ao movimento, ela possui sinal negativo)",
+      "Observe que o tempo de subida do projetil é igual ao tempo de descida, use isso!", "substitua 2t_s, onde t_s: tempo de subida, na formula do MRU",
+      "2*seno(theta)*cos(theta) = seno(2*theta)","Por fim, para encontrar o angulo theta, utilize a função arco-seno"]
+  },
+  {"hintId" : 4,
+    "gameLevelId": 4,
+    "hints": ["Encontre velocidade de lançamento para que o projetil intercepte o alvo em (46 , 19) sabendo que o angulo de lançamento e 40º, i.e. encontre o ponto de altura maxima da trajetoria",
+      "Decomponha o vetor velocidade em duas componentes, isto e, separa o movimento em duas dimensoes e trabalhe com o movimento em y",
+      "Encontre o tempo que o projetil leva para atingir sua altura maxima, i.e, quando a aceleração da gravidade desacelerou o projetil até que sua velocidade no eixo y e igual a 0",
+      "Para a dica anterior, Vf = Vi + a*t, onde Vf = velocidade final, Vi = velocidade inicial e a = aceleração (se a aceleração for contraria ao movimento, ela possui sinal negativo)",
+      "Substitua o tempo na função horaria de MRU"]
+  },
+  {"hintId" : 5,
+    "gameLevelId": 5,
+    "hints": ["Semelhante ao exercicio anterior, mas na Lua a aceleraçao da gravidade é de 1.68 m/s^2"]
+  },
+  {"hintId" : 6,
+    "gameLevelId": 6,
+    "hints": ["Semelhante ao exercicio 4, onde queriamos achar o alcance maximo da trajetória, mas na Lua a aceleraçao da gravidade é de 1.68 m/s^2"]
+  }
+
+]

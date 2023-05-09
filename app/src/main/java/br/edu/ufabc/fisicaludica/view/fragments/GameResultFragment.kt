@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.R
 import br.edu.ufabc.fisicaludica.databinding.FragmentGameResultBinding
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragment for the game result.
@@ -45,11 +46,16 @@ class GameResultFragment : Fragment() {
                 binding.gameResultFragmentLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.green_dark))
                 binding.gameResultFragmentCard.setBackgroundColor(ContextCompat.getColor(context, R.color.green_light))
                 binding.resultGameFragmentImage.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.trofeu_vencedor))
+                binding.resultGameFragmentMainDefaultMessage.text = getString(R.string.default_main_message_for_result_game)
+                binding.resultGameFragmentSecundaryDefaultMessage.text = getString(R.string.default_secundary_message_for_result_game)
+                callEnableNextLevel()
             }
             else{
                 binding.gameResultFragmentLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.red_dark))
                 binding.gameResultFragmentCard.setBackgroundColor(ContextCompat.getColor(context, R.color.red_light))
                 binding.resultGameFragmentImage.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.newton_perdedor))
+                binding.resultGameFragmentMainDefaultMessage.text = getString(R.string.default_main_message_for_result_game_bad)
+                binding.resultGameFragmentSecundaryDefaultMessage.text = getString(R.string.default_secundary_message_for_result_game_bad)
             }
         }
     }
@@ -76,6 +82,24 @@ class GameResultFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.isAppBarVisible.value = true
+    }
+
+    fun callEnableNextLevel() {
+        viewModel.enableNextGameLevel(viewModel.clickedMapId.value!!).observe(viewLifecycleOwner) {status->
+            when(status) {
+                is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to unlock level next level for player", status.e)
+                    Snackbar.make(binding.root, "Failed unlock you the next level", Snackbar.LENGTH_LONG)
+                        .show()
+                }
+                MainViewModel.Status.Loading -> {
+                    binding.progressHorizontal.visibility = View.VISIBLE
+                }
+                is MainViewModel.Status.Success -> {
+                    binding.progressHorizontal.visibility = View.GONE
+                }
+            }
+        }
     }
 
 }
