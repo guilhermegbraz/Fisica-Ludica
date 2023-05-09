@@ -20,20 +20,17 @@ class GameLevel (
         const val projectileLauncherW = 4.0
         const val projectileW = 1.2
     }
-    var id: Long
-        private set
-      var backgroudUrl: String
-        private set
-    var title: String
-        private set
+    val id: Long
+    val backgroudUrl: String
+    val title: String
     val widthMeters: Double
     val groundPosition: Double
+
     val elementsPosition : GameLevelElementsPosition
     val worldAtributtes: GameLevelAtributtes
     val correctAnswer:GameLevelAnswer
 
     var isEnable: Boolean = false
-
     val targetHeight = targetH
     val projectileLauncherWidht = projectileLauncherW
     val projectileWidth = projectileW

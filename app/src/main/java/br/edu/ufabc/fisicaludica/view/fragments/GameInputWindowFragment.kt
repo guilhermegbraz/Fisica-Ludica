@@ -20,6 +20,7 @@ import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
 import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragment for the game input data stage.
@@ -42,11 +43,10 @@ class GameInputWindowFragment : Fragment() {
         binding.gameFragmentGameWindow.visibility = View.INVISIBLE
 
         viewModel.clickedMapId.value?.let {
-            Log.d("input window", "vou montar a tela com o id: ${it}")
             viewModel.getGameLevelById(it).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is MainViewModel.Status.Loading -> {
-
+                        binding.progressHorizontal.visibility = View.VISIBLE
                     }
                     is MainViewModel.Status.Success -> {
                         val gameLevel = (status.result as MainViewModel.Result.SingleGameLevel).value
@@ -64,7 +64,10 @@ class GameInputWindowFragment : Fragment() {
                         binding.gameFragmentGameWindow.visibility = View.VISIBLE
                     }
                     is MainViewModel.Status.Failure -> {
-
+                        Log.e("FRAGMENT", "Failed to get gameLevel ", status.e)
+                        Snackbar.make(binding.root, "Failed start the game", Snackbar.LENGTH_LONG)
+                            .show()
+                        binding.progressHorizontal.visibility = View.INVISIBLE
                     }
                 }
             }
@@ -163,10 +166,12 @@ class GameInputWindowFragment : Fragment() {
                 .observe(viewLifecycleOwner) {status->
                     when(status) {
                         is MainViewModel.Status.Failure -> {
-                            Log.d("uploadTest", "O upload esta falhou")
+                            Log.e("FRAGMENT", "Failed to get gameLevel ", status.e)
+                            Snackbar.make(binding.root, "Failed save your inputs for the game", Snackbar.LENGTH_LONG)
+                                .show()
                         }
                         MainViewModel.Status.Loading -> {
-                            Log.d("uploadTest", "O upload esta carregando")
+                            binding.progressHorizontal.visibility = View.VISIBLE
                         }
                         is MainViewModel.Status.Success -> {
                             GameInputWindowFragmentDirections.showGameScene(binding.gameFragmentSlideBarVelocity.value,

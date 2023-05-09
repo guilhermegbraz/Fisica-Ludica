@@ -1,7 +1,6 @@
 package br.edu.ufabc.fisicaludica.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -106,7 +105,6 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             val gameLevel = gameLevelRepository.getGameLevelById(id)
             changeCurrentGameHint(gameLevel.id)
             emit(Status.Success(Result.SingleGameLevel(gameLevel)))
-            Log.d("teste velo", "O objeto saiu da viewModel com velocidade = ${gameLevel.worldAtributtes.initialVelocity}")
         } catch (e: Exception) {
             emit(Status.Failure(Exception("Failed to get element by id", e)))
         }
@@ -117,6 +115,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             val hint = gameHintRepository.getHintByGameLevelId(id)
             currentHintCollection.value = hint
         } catch (e: Exception) {
+            throw Exception("Failed to get the hints for the current level")
         }
     }
 
@@ -125,7 +124,6 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             emit(Status.Loading)
             emit(Status.Success(Result.GameLevelList(gameLevelRepository.getAll())))
         } catch (e: Exception) {
-            Log.d("erro firestore", e.toString())
             emit(Status.Failure(Exception("Failed to get elements", e)))
         }
     }
@@ -138,8 +136,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
         try {
             return app.resources.assets.open(gameLevel.backgroudUrl)
         } catch (e: FileNotFoundException) {
-            Log.d("FNF", "Não encontrei o arquivo ${gameLevel.backgroudUrl}")
-            throw e
+            throw Exception("File not found exception trying to open  ${gameLevel.backgroudUrl}")
         }
     }
 
@@ -162,7 +159,7 @@ class MainViewModel( application: Application) : AndroidViewModel(application) {
             gameLevelRepository.enableNextLevel(gameLevelId)
             emit(Status.Success(Result.EmptyResult))
         } catch (e: Exception) {
-            emit(Status.Failure(e))
+            emit(Status.Failure(Exception("Unable to unlock the next level", e)))
         }
     }
 

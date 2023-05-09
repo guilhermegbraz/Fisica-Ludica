@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.atomic.AtomicBoolean
@@ -26,26 +25,8 @@ class GameLevelFirestoreRepository(application: Application) : GameLevelReposito
         private const val gameLevelIdDoc = "gameLevelId"
         private const val gameAnswerCollection = "answers"
         private const val userIdDoc = "userId"
-        private const val gameUserEnableCollection = "usersEnable"
+        private const val gameUserEnableCollection = "users_enable"
 
-        private object GameLevelDoc {
-            const val id = "gameLevelId"
-            const val backgroundUrl = "backgroundUrl"
-            const val gravityX = "gravityX"
-            const val gravityY = "gravityY"
-            const val groundPosition = "groundPosition"
-            const val initialAngleDegrees = "initialAngleDegrees"
-            const val initialVelocity = "initialVelocity"
-            const val isAngleVariable = "isAngleVariable"
-            const val isVelocityVariable = "isVelocityVariable"
-            const val launcherPositionX = "launcherPositionX"
-            const val launcherPositionY = "launcherPositionY"
-            const val targetPositionX = "targetPositionX"
-            const val targetPositionY = "targetPositionY"
-            const val targetRotation = "targetRotation"
-            const val title = "title"
-            const val widthInMeters = "widthInMeters"
-        }
     }
 
     init {
@@ -79,7 +60,7 @@ class GameLevelFirestoreRepository(application: Application) : GameLevelReposito
     private fun getCollection() = db.collection(gameLevelCollection)
      override suspend fun getAll(): List<GameLevel> {
          val gameLevelList = mutableListOf<GameLevel>()
-         val querySnapshot = getCollection()
+         getCollection()
              .get(getSource())
              .await()
              .documents.forEach{documentSnapshot ->
@@ -182,7 +163,4 @@ class GameLevelFirestoreRepository(application: Application) : GameLevelReposito
             }
     }
 
-    fun add(gameLevelFirestore: GameLevelFirestore) {
-        getCollection().add(gameLevelFirestore)
-    }
 }

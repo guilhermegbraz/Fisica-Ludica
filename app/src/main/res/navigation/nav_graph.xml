@@ -64,7 +64,7 @@
     </fragment>
     <fragment
             android:id="@+id/korgeGameViewFragment"
-            android:name="br.edu.ufabc.fisicaludica.view.korge.KorgeGameViewFragment"
+            android:name="br.edu.ufabc.fisicaludica.view.fragments.KorgeGameViewFragment"
             android:label="fragment_korge_game_view"
             tools:layout="@layout/fragment_korge_game_view">
 

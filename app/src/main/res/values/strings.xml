@@ -14,8 +14,11 @@
     <string name="dialog_hint_pause_default_textView_inside_scroll_area">Deafult hint for examle</string>
     <string name="dialog_hint_pause_textView_inside_scroll_area">%s</string>
     <string name="image_for_result_game_card">Image for representing the result of the game level</string>
-    <string name="default_main_message_for_result_game">Default Main Message for the Result Game</string>
-    <string name="default_secundary_message_for_result_game">Default secundary message for result game</string>
+    <string name="default_main_message_for_result_game">Parabens! voce concluiu o nivel atual e \nesta pronto para o proximo</string>
+    <string name="default_secundary_message_for_result_game">A proxima fase acaba de ser liberada, vamos ver\nse consegue vencer mais um desafio</string>
+    <string name="default_main_message_for_result_game_bad">Poxa, nao foi dessa vez.\nTalvez voce tenha errado os calculos</string>
+    <string name="default_secundary_message_for_result_game_bad">Tente novamente, lembre-se que pode receber\ndicas clicando no ponto de interrogacao</string>
+
     <string name="back_to_map_list">back to map list</string>
     <string name="try_again">try again</string>
     <string name="go_to_map_list_imagebutton">go to map list imageButton</string>
@@ -47,5 +50,6 @@ Aqui voce vai encontrar simulacoes
 interativas de lancamento obliquo.
 Faca o login e venha jogar
     </string>
+    <string name="floating_button_for_leave_the_scene">floating_button_for_leave_the_scene</string>
 
 </resources>

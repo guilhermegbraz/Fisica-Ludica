@@ -19,6 +19,7 @@ import br.edu.ufabc.fisicaludica.databinding.MapListItemBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.viewmodel.FragmentWindow
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Fragment for list the game maps.
@@ -96,8 +97,10 @@ class GameLevelListFragment : Fragment() {
                 }
 
                 is MainViewModel.Status.Failure -> {
-                    Log.d("Status", "Obtivemos Status Failure ")
-                    //status.e.message?.let { Log.d("erro db", it) }
+                    Log.e("FRAGMENT", "Failed list itens", status.e)
+                    Snackbar.make(binding.root, "Failed to list your game levels", Snackbar.LENGTH_LONG)
+                        .show()
+                    binding.progressHorizontal.visibility = View.INVISIBLE
                 }
             }
         }

@@ -9,5 +9,4 @@ data class GameLevelAnswerFirestore(
 ) {
     fun toGameLevelAnswer(): GameLevelAnswer = GameLevelAnswer( angle?: 0.0, velocity?: 0.0)
 
-
 }

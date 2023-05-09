@@ -61,9 +61,13 @@ class AuthFragment : Fragment() {
         viewModel.enableNextGameLevel(0).observe(viewLifecycleOwner) {status->
             when(status) {
                 is MainViewModel.Status.Failure -> {
+                    Log.e("FRAGMENT", "Failed to unlock level 1 for the new player", status.e)
+                    Snackbar.make(binding.root, "Failed start the game", Snackbar.LENGTH_LONG)
+                        .show()
+                    binding.progressHorizontal.visibility = View.INVISIBLE
                 }
                 MainViewModel.Status.Loading -> {
-
+                    binding.progressHorizontal.visibility = View.VISIBLE
                 }
                 is MainViewModel.Status.Success -> {
                     AuthFragmentDirections.goToHome().let{

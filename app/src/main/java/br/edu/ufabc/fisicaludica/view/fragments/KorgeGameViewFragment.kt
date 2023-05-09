@@ -1,6 +1,7 @@
-package br.edu.ufabc.fisicaludica.view.korge
+package br.edu.ufabc.fisicaludica.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import androidx.navigation.fragment.navArgs
 import br.edu.ufabc.fisicaludica.databinding.FragmentKorgeGameViewBinding
 import br.edu.ufabc.fisicaludica.model.domain.GameLevel
 import br.edu.ufabc.fisicaludica.model.domain.GameLevelAnswer
+import br.edu.ufabc.fisicaludica.view.korge.CustomModule
 import br.edu.ufabc.fisicaludica.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.soywiz.korge.android.KorgeAndroidView
 
 class KorgeGameViewFragment : Fragment() {
@@ -28,7 +31,7 @@ class KorgeGameViewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentKorgeGameViewBinding.inflate(inflater,container, false)
         korgeAndroidView = KorgeAndroidView(requireContext())
         return binding.root
@@ -48,15 +51,19 @@ class KorgeGameViewFragment : Fragment() {
             viewModel.getGameLevelById(it).observe(viewLifecycleOwner) { status ->
                 when (status) {
                     is MainViewModel.Status.Loading -> {
-
+                        binding.progressHorizontal.visibility = View.VISIBLE
                     }
                     is MainViewModel.Status.Success -> {
+                        binding.progressHorizontal.visibility = View.GONE
                         val gameLevel = (status.result as MainViewModel.Result.SingleGameLevel).value
                         this.gameLevel = gameLevel
                         loadToolModule(gameLevel)
                     }
                     is MainViewModel.Status.Failure -> {
-                        TODO()
+                        Log.e("FRAGMENT", "Failed to launch KorGe scene", status.e)
+                        Snackbar.make(binding.root, "Failed launch the animation", Snackbar.LENGTH_LONG)
+                            .show()
+                        binding.progressHorizontal.visibility = View.INVISIBLE
                     }
                 }
             }
@@ -67,10 +74,13 @@ class KorgeGameViewFragment : Fragment() {
     private fun bindEvents(answer:GameLevelAnswer) {
         binding.fragmentGameWindowContinueButton.setOnClickListener {
             this.buttonClicked = true
+            binding.progressHorizontal.visibility = View.GONE
             KorgeGameViewFragmentDirections.showGameResult(
                 gameLevel.correctAnswer.angle.equals(answer.angle)
-                    .and(gameLevel.correctAnswer.velocity.equals(answer.velocity)
-                    )).let {
+                    .and(
+                        gameLevel.correctAnswer.velocity.equals(answer.velocity)
+                    )
+            ).let {
                 findNavController().navigate(it)
             }
         }
