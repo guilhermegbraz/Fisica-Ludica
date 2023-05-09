@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -53,11 +54,10 @@ class MainActivity : AppCompatActivity() {
 
 
         getNavController().addOnDestinationChangedListener {_, destination, _ ->
-            Log.d("destination", "estamos em ${destination.displayName}")
             when(destination.id) {
                 R.id.destination_home -> binding.topAppBar.navigationIcon =
                     ContextCompat.getDrawable(this,R.drawable.baseline_logout_24)
-
+                
                 else-> binding.topAppBar.navigationIcon =
                     ContextCompat.getDrawable(this,R.drawable.baseline_arrow_back_40)
             }
@@ -84,36 +84,38 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.topAppBar.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.main_activity_pause_button->{
-                    when(viewModel.currentFragmentWindow.value) {
-                        FragmentWindow.ListFragment -> {
-                            val dialog = DialogPause(listOf(getString(R.string.list_fragment_hint)),0 )
-                            dialog.show(supportFragmentManager, "pause dialog")
-                        }
-                        FragmentWindow.HomeFragment -> {
-                            val dialog = DialogPause(listOf(getString(R.string.home_fragment_hint)),0 )
-                            dialog.show(supportFragmentManager, "pause dialog")
-                        }
-                        FragmentWindow.InputGameWindow -> {
-                            viewModel.currentHintCollection.value?.let {gameHint->
-                                val dialog = DialogPause(gameHint.hints,0 )
-                                dialog.show(supportFragmentManager, "pause dialog")
-                            }
-
-                        }
-
-                        else -> {}
-                    }
-                    true
-                }
-                else -> false
-            }
+            hintButtonClick(it.itemId)
         }
 
         this.viewModel.isAppBarVisible.observe(this){
             if(it) binding.appBarMain.visibility = View.VISIBLE
             else binding.appBarMain.visibility = View.GONE
+        }
+    }
+
+    private fun hintButtonClick(itemId: Int): Boolean {
+        return when (itemId) {
+            R.id.main_activity_pause_button -> {
+                when (viewModel.currentFragmentWindow.value) {
+                    FragmentWindow.ListFragment -> {
+                        val dialog = DialogPause(listOf(getString(R.string.list_fragment_hint)), 0)
+                        dialog.show(supportFragmentManager, "pause dialog")
+                    }
+                    FragmentWindow.InputGameWindow -> {
+                        viewModel.currentHintCollection.value?.let { gameHint ->
+                            val dialog = DialogPause(gameHint.hints, 0)
+                            dialog.show(supportFragmentManager, "pause dialog")
+                        }
+                    }
+                    else -> {
+                        val dialog = DialogPause(listOf(getString(R.string.home_fragment_hint)), 0)
+                        dialog.show(supportFragmentManager, "pause dialog")
+                    }
+                }
+                true
+            }
+
+            else -> false
         }
     }
 
