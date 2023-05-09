@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "332765846070",
+    "project_id": "fisica-ludica-padm",
+    "storage_bucket": "fisica-ludica-padm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332765846070:android:864fd0fee5485f6dec9697",
+        "android_client_info": {
+          "package_name": "br.edu.ufabc.fisicaludica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332765846070-3dhr2b21dnt7v7309hanfl8v3l4t12r0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.edu.ufabc.fisicaludica",
+            "certificate_hash": "ffcea95bff4dc7ffca31943306c7b00ccd8c04b1"
+          }
+        },
+        {
+          "client_id": "332765846070-mslmshgoivc69doqccgj9m55ojve6o13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPm3rRi68pesf6oojPQmrBkJD3qatgRrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332765846070-mslmshgoivc69doqccgj9m55ojve6o13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
