@@ -109,3 +109,7 @@ o fragmento de listagem, ademais também acessamos essa coleção sempre que o u
 conclui uma fase do jogo para então a próxima ser liberada. Com exceção da primeira
 
 fase que é liberada quando o usuário faz login pela primeira vez na aplicação.
+
+## Demonstração da aplicação
+
+https://youtu.be/h8krzIcr_fA
