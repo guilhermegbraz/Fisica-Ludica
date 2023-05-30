@@ -28,6 +28,10 @@ Com múltiplas fases onde velocidade inicial ou ângulo de lançamento são fixa
 jogador encontre o valor da variável, variando também as condições em que o objeto deve atingir o
 alvo.
 
+## Como jogar
+O apk do aplicativo esta disponivel em: https://drive.google.com/drive/folders/1kEuze-OaRMlJ2pXM7-_4rlmP-xz4YO0N?usp=sharing
+voce pode instalar em seu smartphone ou então clonar o projeto e rodar no seu emulador
+
 ## Fluxo da utilização do app
 #### 1- home:
 ![tela home](https://github.com/guilhermegbraz/Fisica-Ludica/assets/84741834/9b6a3f49-9d6a-4ef8-b0c3-5dc7c0d533f9)
