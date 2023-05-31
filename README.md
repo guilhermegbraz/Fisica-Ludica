@@ -30,6 +30,7 @@ alvo.
 
 ## Como jogar
 O apk do aplicativo esta disponivel em: https://drive.google.com/drive/folders/1kEuze-OaRMlJ2pXM7-_4rlmP-xz4YO0N?usp=sharing
+
 voce pode instalar em seu smartphone ou então clonar o projeto e rodar no seu emulador
 
 ## Fluxo da utilização do app
